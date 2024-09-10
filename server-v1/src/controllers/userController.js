@@ -21,7 +21,7 @@ const login = async (req, res, next) => {
         if (user.message.length > 0) {
             return res.status(400).json({
                 errors: user.message,
-                message: 'Login Failed',
+                message: 'Login Gagal',
                 data: null,
             });
         }
@@ -33,8 +33,8 @@ const login = async (req, res, next) => {
         if (!userExists || !compare(data.password, userExists.password)) {
             // Return a generic error message for both user not found and wrong password
             return res.status(400).json({
-                errors: ['Username or password is incorrect'],
-                message: 'Login Failed',
+                errors: ['Username atau Password Salah'],
+                message: 'Login Gagal',
                 data: null,
             });
         }
@@ -48,7 +48,7 @@ const login = async (req, res, next) => {
 
         return res.status(200).json({
             errors: [],
-            message: 'Login successfully',
+            message: 'Login sukses',
             data: usr,
             accessToken: token,
             refreshToken: refreshToken,

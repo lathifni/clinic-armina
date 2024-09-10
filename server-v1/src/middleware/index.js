@@ -1,8 +1,8 @@
 import express from 'express';
 import './winston.js';
 import route from '../routes/index.js';
-const appMiddleware = express();
 import cors from 'cors';
+const appMiddleware = express();
 
 appMiddleware.use(
     cors({

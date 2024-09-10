@@ -1,5 +1,6 @@
 import sequelize from '../utils/db.js';
 import { Sequelize } from 'sequelize';
+import LayananKategori from './layanan_kategori.js';
 
 const Layanan = sequelize.define(
     'Layanan',
@@ -23,6 +24,10 @@ const Layanan = sequelize.define(
             type: Sequelize.STRING,
             allowNull: true,
         },
+        price: {
+            type: Sequelize.LONG,
+            allowNull: true,
+        },
     },
     {
         tableName: 'layanan',
@@ -30,5 +35,17 @@ const Layanan = sequelize.define(
         timestamps: true,
     }
 );
+
+Layanan.belongsTo(LayananKategori, {
+    foreignKey: 'layanan_kategori_id',
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE',
+});
+
+LayananKategori.hasMany(Layanan, {
+    foreignKey: 'layanan_kategori_id',
+    onDelete: 'RESTRICT',
+    onUpdate: 'CASCADE',
+});
 
 export default LayananKategori;

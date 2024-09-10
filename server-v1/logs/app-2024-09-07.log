@@ -50,3 +50,50 @@ ReferenceError: updatePassword is not defined
     at ModuleJob.run (node:internal/modules/esm/module_job:234:25)
     at async ModuleLoader.import (node:internal/modules/esm/loader:473:24)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:123:5)
+ [LOGGER] 2024-09-07 10:37:06.052 PM error : uncaughtException: connect ECONNREFUSED 127.0.0.1:3306
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at ConnectionManager.connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:92:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async Users.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:377:9)
+ [LOGGER] 2024-09-07 10:37:06.895 PM error : uncaughtException: connect ECONNREFUSED 127.0.0.1:3306
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at ConnectionManager.connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:92:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async Transaction.prepareEnvironment (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\transaction.js:85:24)
+    at async Sequelize.transaction (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:500:7)
+    at async createLayananKategori (file:///D:/Repository/Klinik%20Armina/clinic-armina/server-v1/src/controllers/layananKategoriController.js:7:15)
+ [LOGGER] 2024-09-07 10:37:17.703 PM error : uncaughtException: connect ECONNREFUSED 127.0.0.1:3306
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at ConnectionManager.connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:92:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async Users.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:377:9)
+ [LOGGER] 2024-09-07 10:37:32.784 PM error : uncaughtException: connect ECONNREFUSED 127.0.0.1:3306
+SequelizeConnectionRefusedError: connect ECONNREFUSED 127.0.0.1:3306
+    at ConnectionManager.connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\mysql\connection-manager.js:92:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:222:24)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:174:32
+    at async ConnectionManager.getConnection (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\connection-manager.js:197:7)
+    at async D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\dialects\abstract\query-interface.js:102:17)
+    at async Users.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\model.js:939:21)
+    at async Sequelize.sync (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\sequelize\lib\sequelize.js:377:9)
+ [LOGGER] 2024-09-07 10:44:59.397 PM error : uncaughtException: t.rollback is not a function
+TypeError: t.rollback is not a function
+    at updateLayananKategori (file:///D:/Repository/Klinik%20Armina/clinic-armina/server-v1/src/controllers/layananKategoriController.js:105:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

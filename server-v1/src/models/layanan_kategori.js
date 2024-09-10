@@ -15,6 +15,14 @@ const LayananKategori = sequelize.define(
             allowNull: false,
             unique: true,
         },
+        image: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
+        description: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
     },
     {
         tableName: 'layanan_kategori',

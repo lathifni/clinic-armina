@@ -28,6 +28,10 @@ const Layanan = sequelize.define(
             type: Sequelize.LONG,
             allowNull: true,
         },
+        link: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
     },
     {
         tableName: 'layanan',

@@ -1,0 +1,36 @@
+ [LOGGER] 2024-09-14 09:24:09.861 PM error : uncaughtException: Unknown database 'klinik_armina'
+SequelizeConnectionError: Unknown database 'klinik_armina'
+    at ConnectionManager.connect (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+    at async /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:102:17)
+    at async Users.sync (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:939:21)
+    at async Sequelize.sync (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:377:9)
+ [LOGGER] 2024-09-14 09:24:13.971 PM error : uncaughtException: Unknown database 'klinik_armina'
+SequelizeConnectionError: Unknown database 'klinik_armina'
+    at ConnectionManager.connect (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/mysql/connection-manager.js:102:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ConnectionManager._connect (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:222:24)
+    at async /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:174:32
+    at async ConnectionManager.getConnection (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/connection-manager.js:197:7)
+    at async /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:305:26
+    at async MySQLQueryInterface.tableExists (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:102:17)
+    at async Users.sync (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:939:21)
+    at async Sequelize.sync (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:377:9)
+ [LOGGER] 2024-09-14 10:06:29.489 PM error : uncaughtException: Cannot access 'app' before initialization
+ReferenceError: Cannot access 'app' before initialization
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/index.js:7:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+ [LOGGER] 2024-09-14 10:07:03.235 PM error : uncaughtException: Cannot access 'app' before initialization
+ReferenceError: Cannot access 'app' before initialization
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/index.js:11:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)

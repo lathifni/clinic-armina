@@ -3,7 +3,6 @@ import Tentang from '../models/tentang.js';
 import { dataValid } from '../validation/dataValidation.js';
 import fs from 'fs';
 import { Op } from 'sequelize';
-import { title } from 'process';
 
 const createTentang = async (req, res, next) => {
     const t = await sequelize.transaction();
@@ -150,7 +149,7 @@ const updateTentang = async (req, res, next) => {
         res.status(200).json({
             errors: [],
             message: 'Update Tentang Kami success',
-            data: kategori.data,
+            data: tentang.data,
         });
     } catch (error) {
         await t.rollback();

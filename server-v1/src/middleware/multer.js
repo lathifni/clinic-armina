@@ -58,4 +58,94 @@ const tentangUpload = multer({
     },
 });
 
-export { layananKategoriUpload, tentangUpload };
+const fasilitasStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/fasilitas/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const fasilitasUpload = multer({
+    storage: fasilitasStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+const tenagaMedisStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/tenagaMedis/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const tenagaMedisUpload = multer({
+    storage: tenagaMedisStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+const subLayananStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/subLayanan/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const subLayananUpload = multer({
+    storage: subLayananStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+export {
+    layananKategoriUpload,
+    tentangUpload,
+    fasilitasUpload,
+    tenagaMedisUpload,
+    subLayananUpload,
+};

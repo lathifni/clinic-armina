@@ -1,8 +1,8 @@
 import sequelize from '../utils/db.js';
 import { Sequelize } from 'sequelize';
 
-const Layanan = sequelize.define(
-    'Layanan',
+const TenagaMedis = sequelize.define(
+    'TenagaMedis',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -10,25 +10,33 @@ const Layanan = sequelize.define(
             primaryKey: true,
             allowNull: false,
         },
-        name: {
+        nama: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true,
+        },
+        jenis: {
+            type: Sequelize.STRING,
+            allowNull: false,
         },
         image: {
             type: Sequelize.STRING,
             allowNull: true,
         },
-        description: {
-            type: Sequelize.STRING,
+        waktu_mulai: {
+            type: Sequelize.TIME,
+            allowNull: true,
+        },
+        waktu_selesai: {
+            type: Sequelize.DATE,
             allowNull: true,
         },
     },
     {
-        tableName: 'layanan',
+        tableName: 'tenaga_medis',
         underscored: true,
         timestamps: true,
     }
 );
 
-export default Layanan;
+export default TenagaMedis;

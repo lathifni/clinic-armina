@@ -1,60 +1,53 @@
 import sequelize from '../utils/db.js';
-import Layanan from '../models/layanan.js';
 import { dataValid } from '../validation/dataValidation.js';
 import { Op } from 'sequelize';
 import fs from 'fs';
+import TenagaMedis from '../models/tenagaMedis.js';
 
-const createLayanan = async (req, res, next) => {
+const createTenagaMedis = async (req, res, next) => {
     const t = await sequelize.transaction();
     const valid = {
-        name: 'required',
+        nama: 'required',
+        jenis: 'required',
+        waktu_mulai: 'required',
+        waktu_selesai: 'required',
     };
     try {
-        const layanan = await dataValid(valid, req.body);
-        if (layanan.message.length > 0) {
+        const tenagaMedis = await dataValid(valid, req.body);
+
+        if (tenagaMedis.message.length > 0) {
             return res.status(400).json({
-                errors: layanan.message,
-                message: 'Gagal menambahkan layanan',
-                data: null,
-            });
-        }
-        const kategoriExists = await Layanan.findAll({
-            where: {
-                name: layanan.data.name,
-            },
-        });
-        if (kategoriExists.length > 0) {
-            return res.status(400).json({
-                errors: ['Layanan telah tersedia'],
-                message: 'Gagal menambahkan layanan',
+                errors: tenagaMedis.message,
+                message: 'Gagal menambahkan tenaga medis',
                 data: null,
             });
         }
 
         if (req.file) {
-            layanan.data.image = req.file.path;
+            tenagaMedis.data.image = req.file.path;
         }
 
-        const result = await Layanan.create(
+        const result = await TenagaMedis.create(
             {
-                ...layanan.data,
+                ...tenagaMedis.data,
             },
             {
                 transaction: t,
             }
         );
+
         if (!result) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Layanan gagal ditambahkan'],
-                message: 'Gagal menambahkan layanan',
+                errors: ['Tenaga Medis gagal ditambahkan'],
+                message: 'Gagal menambahkan Tenaga Medis',
                 data: null,
             });
         } else {
             await t.commit();
             res.status(201).json({
                 errors: null,
-                message: 'Layanan baru berhasil ditambahkan',
+                message: 'Tenaga Medis baru berhasil ditambahkan',
                 data: result,
             });
         }
@@ -62,65 +55,68 @@ const createLayanan = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/layananKategoriController.js:createLayanan - ' +
+                'controllers/tenagaMedisController.js:createTenagaMedis - ' +
                     error.message
             )
         );
     }
 };
 
-const updateLayanan = async (req, res, next) => {
+const updateTenagaMedis = async (req, res, next) => {
     const t = await sequelize.transaction();
     const valid = {
-        name: 'required',
+        nama: 'required',
+        jenis: 'required',
+        waktu_mulai: 'required',
+        waktu_selesai: 'required',
     };
     try {
         const id = req.params.id;
-        const layanan = await dataValid(valid, req.body);
-        if (layanan.message.length > 0) {
+        const tenagaMedis = await dataValid(valid, req.body);
+
+        if (tenagaMedis.message.length > 0) {
             return res.status(400).json({
-                errors: layanan.message,
-                message: 'Gagal update layanan',
-                data: layanan.data,
+                errors: tenagaMedis.message,
+                message: 'Gagal update Tenaga Medis',
+                data: tenagaMedis.data,
             });
         }
 
-        const existingKategori = await Layanan.findOne({
-            where: { id: id },
-        });
-        if (!existingKategori) {
+        const existingTenagaMedis = await TenagaMedis.findByPk(id);
+
+        if (!existingTenagaMedis) {
             return res.status(404).json({
-                errors: ['Layanan not found'],
-                message: 'Update Layanan Gagal',
+                errors: ['Tenaga Medis Not Found'],
+                message: 'Update Tenaga Medis Gagal',
                 data: null,
             });
         }
 
         if (req.file) {
-            layanan.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
+            tenagaMedis.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
 
             // Delete the old profile image if it exists and is different from the new one
             if (
-                existingKategori.image &&
-                existingKategori.image !== layanan.data.image
+                existingTenagaMedis.image &&
+                existingTenagaMedis.image !== tenagaMedis.data.image
             ) {
-                fs.unlink(existingKategori.image, (err) => {
+                fs.unlink(existingTenagaMedis.image, (err) => {
                     if (err) {
                         console.error(
-                            `Gagal menghapus gambar lama (layanan): ${err.message}`
+                            `Gagal menghapus gambar lama (tenaga medis): ${err.message}`
                         );
                     } else {
                         console.log(
-                            `Berhasil menghapus gambar lama (layanan): ${existingKategori.image}`
+                            `Berhasil menghapus gambar lama (tenaga medis): ${existingKategori.image}`
                         );
                     }
                 });
             }
         }
 
-        const result = await Layanan.update(
+        const result = await TenagaMedis.update(
             {
-                ...layanan.data,
+                ...tenagaMedis.data,
             },
             {
                 where: {
@@ -133,8 +129,8 @@ const updateLayanan = async (req, res, next) => {
         if (result[0] === 0) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Layanan not found'],
-                message: 'Update Layanan Gagal',
+                errors: ['Tenaga Medis not found'],
+                message: 'Update Tenaga Medis Gagal',
                 data: null,
             });
         }
@@ -142,54 +138,53 @@ const updateLayanan = async (req, res, next) => {
         await t.commit();
         res.status(200).json({
             errors: [],
-            message: 'Update Layanan success',
-            data: layanan.data,
+            message: 'Update tenaga medis success',
+            data: tenagaMedis.data,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controller/layananKategoriController.js:updateLayanan - ' +
+                'controllers/tenagaMedisController.js:updateTenagaMedis - ' +
                     error.message
             )
         );
     }
 };
 
-const deleteLayanan = async (req, res, next) => {
+const deleteTenagaMedis = async (req, res, next) => {
     const t = await sequelize.transaction();
     try {
         const id = req.params.id;
+        const tenagaMedis = await TenagaMedis.findByPk(id, { transaction: t });
 
-        const layanan = await Layanan.findByPk(id, { transaction: t });
-
-        if (!layanan) {
+        if (!tenagaMedis) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Layanan not found'],
-                message: 'Delete Layanan gagal',
+                errors: ['Tenaga medis not found'],
+                message: 'Delete Tenaga medis gagal',
                 data: null,
             });
         }
 
-        const imagePath = layanan.image;
+        const imagePath = tenagaMedis.image;
 
-        const kategoriDelete = await Layanan.destroy({
+        const tenagaMedisDelete = await TenagaMedis.destroy({
             where: {
                 id: id,
             },
             transaction: t,
         });
-        if (!kategoriDelete) {
+
+        if (!tenagaMedisDelete) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Layanan not found'],
-                message: 'Delete Layanan gagal',
+                errors: ['Tenaga medis not found'],
+                message: 'Delete Tenaga medis gagal',
                 data: null,
             });
         }
 
-        // Delete the image file if it exists
         if (imagePath) {
             try {
                 fs.unlink(imagePath);
@@ -200,7 +195,7 @@ const deleteLayanan = async (req, res, next) => {
                 await t.rollback();
                 return res.status(500).json({
                     errors: ['Failed to delete image'],
-                    message: 'Delete Layanan gagal',
+                    message: 'Delete Tenaga Medis gagal',
                     data: null,
                 });
             }
@@ -209,21 +204,21 @@ const deleteLayanan = async (req, res, next) => {
         await t.commit();
         return res.status(200).json({
             errors: [],
-            message: 'Delete Layanan success',
+            message: 'Delete tenaga medis success',
             data: null,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controllers/layananKategoriController.js:deleteLayanan - ' +
+                'controllers/tenagaMedisController.js:deleteTenagaMedis - ' +
                     error.message
             )
         );
     }
 };
 
-const getAllLayanan = async (req, res, next) => {
+const getAllTenagaMedis = async (req, res, next) => {
     try {
         const page = parseInt(req.query.page) || 0;
         const limit = parseInt(req.query.limit) || 10;
@@ -233,20 +228,20 @@ const getAllLayanan = async (req, res, next) => {
         const whereCondition = {
             [Op.or]: [
                 {
-                    name: {
+                    nama: {
                         [Op.like]: `%${search}%`,
                     },
                 },
             ],
         };
 
-        const totalRows = await Layanan.count({
+        const totalRows = await TenagaMedis.count({
             where: whereCondition,
         });
 
         const totalPage = Math.ceil(totalRows / limit);
 
-        const result = await Layanan.findAll({
+        const result = await TenagaMedis.findAll({
             where: whereCondition,
             offset: offset,
             limit: limit,
@@ -255,15 +250,15 @@ const getAllLayanan = async (req, res, next) => {
 
         if (!result || result.length === 0) {
             return res.status(404).json({
-                errors: ['Layanan tidak ditemukan'],
-                message: 'Get Layanan gagal',
+                errors: ['Tenaga medis tidak ditemukan'],
+                message: 'Get tenaga medis gagal',
                 data: null,
             });
         }
 
         res.status(200).json({
             errors: [],
-            message: 'Get Layanan success',
+            message: 'Get tenaga medis success',
             data: result,
             limit: limit,
             totalRows: totalRows,
@@ -272,11 +267,16 @@ const getAllLayanan = async (req, res, next) => {
     } catch (error) {
         next(
             new Error(
-                'controllers/kategoriLayananController.js:getAllLayanan - ' +
+                'controllers/tenagaMedisController.js:getAllTenagaMedis - ' +
                     error.message
             )
         );
     }
 };
 
-export { createLayanan, updateLayanan, deleteLayanan, getAllLayanan };
+export {
+    createTenagaMedis,
+    updateTenagaMedis,
+    deleteTenagaMedis,
+    getAllTenagaMedis,
+};

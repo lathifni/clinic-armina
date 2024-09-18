@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -21,4 +22,16 @@
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@font-face {
+  font-family: 'Racing Sans One';
+  src: url('/fonts/RSO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+.title{
+  font-family: 'Irish Grover'
 }

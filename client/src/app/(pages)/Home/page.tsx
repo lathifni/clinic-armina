@@ -1,8 +1,19 @@
-export default function Page() {
-    return (
-<header className="w-svw bg-white text-red-500 h-24 container ">
-        <h1>hello world</h1>
-        <button> hello</button>
-</header>
-    )
-  }
+import React from "react";
+import MainSection from "@/components/Home/MainSection";
+import PromoSection from "@/components/Home/PromoSection";
+import QuoteSection from "@/components/Home/QuoteSection";
+import ServiceSection from "@/components/Home/ServiceSection";
+
+export default function Home() {
+  return (
+    <div>
+      <main className="text-white">
+        <MainSection />
+        <PromoSection />
+        <QuoteSection />
+        <ServiceSection />
+      </main>
+      
+    </div>
+  );
+}

@@ -1,0 +1,26 @@
+ [LOGGER] 2024-09-13 09:17:25.072 AM error : uncaughtException: Route.post() requires a callback function but got a [object Object]
+Error: Route.post() requires a callback function but got a [object Object]
+    at Route.<computed> [as post] (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\express\lib\router\route.js:216:15)
+    at proto.<computed> [as post] (D:\Repository\Klinik Armina\clinic-armina\server-v1\node_modules\express\lib\router\index.js:521:19)
+    at file:///D:/Repository/Klinik%20Armina/clinic-armina/server-v1/src/routes/tentangRoute.js:13:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:234:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:473:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:123:5)
+ [LOGGER] 2024-09-13 09:17:56.763 AM error : uncaughtException: errorrHandling is not defined
+ReferenceError: errorrHandling is not defined
+    at file:///D:/Repository/Klinik%20Armina/clinic-armina/server-v1/src/routes/index.js:12:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:234:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:473:24)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:123:5)
+ [LOGGER] 2024-09-13 09:22:37.226 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:25:51.018 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:28:08.311 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:29:13.375 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:30:17.989 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:30:19.262 AM error : controllers/tentangController.js:createTentang - Cannot read properties of undefined (reading 'uuid')
+ [LOGGER] 2024-09-13 09:30:43.770 AM error : uncaughtException: t.rollback is not a function
+TypeError: t.rollback is not a function
+    at createTentang (file:///D:/Repository/Klinik%20Armina/clinic-armina/server-v1/src/controllers/tentangController.js:67:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-13 09:32:37.810 AM error : controllers/tentangController.js:getAllTentang - Op is not defined
+ [LOGGER] 2024-09-13 09:32:53.355 AM error : controllers/tentangController.js:getAllTentang - Unknown column 'Tentang.name' in 'where clause'

@@ -1,0 +1,54 @@
+ [LOGGER] 2024-09-17 06:59:03.930 PM error : uncaughtException: commit has been called on this transaction(b1a7ddeb-cd8f-4d42-930f-49e746295a5d), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+Error: commit has been called on this transaction(b1a7ddeb-cd8f-4d42-930f-49e746295a5d), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+    at checkTransaction (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:294:23)
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:304:7
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:59:25
+    at new Promise (<anonymous>)
+    at retryAsPromised (/home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:48:12)
+    at Sequelize.query (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:300:12)
+    at MySQLQueryInterface.bulkDelete (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:33)
+    at Fasilitas.destroy (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-17 06:59:05.831 PM error : uncaughtException: commit has been called on this transaction(ae3508c7-3ba6-4dc8-bad0-72852b6f28dc), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+Error: commit has been called on this transaction(ae3508c7-3ba6-4dc8-bad0-72852b6f28dc), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+    at checkTransaction (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:294:23)
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:304:7
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:59:25
+    at new Promise (<anonymous>)
+    at retryAsPromised (/home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:48:12)
+    at Sequelize.query (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:300:12)
+    at MySQLQueryInterface.bulkDelete (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:33)
+    at Fasilitas.destroy (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-17 06:59:05.835 PM error : uncaughtException: Transaction cannot be rolled back because it has been finished with state: commit
+Error: Transaction cannot be rolled back because it has been finished with state: commit
+    at Transaction.rollback (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/transaction.js:59:13)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/controllers/fasilitasController.js:186:30
+    at FSReqCallback.oncomplete (node:fs:192:23)
+ [LOGGER] 2024-09-17 06:59:20.506 PM error : uncaughtException: commit has been called on this transaction(1ada5f8f-9f28-43fe-ad61-a2f3ab488ce3), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+Error: commit has been called on this transaction(1ada5f8f-9f28-43fe-ad61-a2f3ab488ce3), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+    at checkTransaction (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:294:23)
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:304:7
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:59:25
+    at new Promise (<anonymous>)
+    at retryAsPromised (/home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:48:12)
+    at Sequelize.query (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:300:12)
+    at MySQLQueryInterface.bulkDelete (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:33)
+    at Fasilitas.destroy (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-17 06:59:20.530 PM error : uncaughtException: Transaction cannot be rolled back because it has been finished with state: commit
+Error: Transaction cannot be rolled back because it has been finished with state: commit
+    at Transaction.rollback (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/transaction.js:59:13)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/controllers/fasilitasController.js:186:30
+    at FSReqCallback.oncomplete (node:fs:192:23)
+ [LOGGER] 2024-09-17 10:56:44.841 PM error : uncaughtException: commit has been called on this transaction(2ac32bf5-f306-44de-a20d-20309f689224), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+Error: commit has been called on this transaction(2ac32bf5-f306-44de-a20d-20309f689224), you can no longer use it. (The rejected query is attached as the 'sql' property of this error)
+    at checkTransaction (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:294:23)
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:304:7
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:59:25
+    at new Promise (<anonymous>)
+    at retryAsPromised (/home/thomas/Repository/clinic-armina/server-v1/node_modules/retry-as-promised/dist/index.js:48:12)
+    at Sequelize.query (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:300:12)
+    at MySQLQueryInterface.bulkDelete (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/dialects/abstract/query-interface.js:403:33)
+    at Faq.destroy (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:1838:42)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

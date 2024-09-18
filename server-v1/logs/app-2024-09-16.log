@@ -1,0 +1,7 @@
+ [LOGGER] 2024-09-16 10:57:09.246 PM error : uncaughtException: faq is not defined
+ReferenceError: faq is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/models/faq.js:23:20
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)

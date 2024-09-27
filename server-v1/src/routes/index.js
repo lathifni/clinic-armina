@@ -5,8 +5,10 @@ import errorrHandling from '../controllers/errorHandlingController.js';
 import layananRouter from './layananRoute.js';
 import fasilitasRouter from './fasilitasRoute.js';
 import tenagaMedisRouter from './tenagaMedisRoute.js';
-import faqRouter from './faqRouter.js';
+import faqRouter from './faqRoute.js';
 import subLayananRouter from './subLayananRoute.js';
+import sunatRouter from './sunatRoute.js';
+import promoRouter from './promoRoute.js';
 
 const route = express.Router();
 
@@ -17,6 +19,8 @@ route.use('/api', fasilitasRouter);
 route.use('/api', tenagaMedisRouter);
 route.use('/api', faqRouter);
 route.use('/api', subLayananRouter);
+route.use('/api', sunatRouter);
+route.use('/api', promoRouter);
 
 route.use('*', errorrHandling);
 route.use('*', (req, res) => {

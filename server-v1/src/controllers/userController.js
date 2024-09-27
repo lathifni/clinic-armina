@@ -1,4 +1,3 @@
-import sequelize from '../utils/db.js';
 import { dataValid } from '../validation/dataValidation.js';
 import Users from '../models/users.js';
 import { compare } from '../utils/bcrypt.js';
@@ -148,4 +147,62 @@ const updatePassword = async (req, res, next) => {
     }
 };
 
-export { login, updatePassword };
+const setRefreshToken = async (req, res, next) => {
+    try {
+        const authHeader = req.headers['authorization'];
+        const token = authHeader && authHeader.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({
+                errors: ['Refresh token not found'],
+                message: 'Refresh Failed',
+                data: null,
+            });
+        }
+        const verify = verifyRefreshToken(token);
+        if (!verify) {
+            return res.status(401).json({
+                errors: ['Invalid refresh token'],
+                message: 'Refresh Failed',
+                data: null,
+            });
+        }
+        let data = parseJWT(token);
+        const user = await Users.findOne({
+            where: {
+                email: data.email,
+                isActive: true,
+            },
+        });
+        if (!user) {
+            return res.status(404).json({
+                errors: ['User not found'],
+                message: 'Refresh Field',
+                data: null,
+            });
+        } else {
+            const usr = {
+                userId: user.id,
+                name: user.name,
+                username: user.username,
+            };
+            const token = generateAccessToken(usr);
+            const refreshToken = generateRefreshToken(usr);
+            return res.status(200).json({
+                errors: [],
+                message: 'Refresh successfully',
+                data: usr,
+                acessToken: token,
+                refreshToken: refreshToken,
+            });
+        }
+    } catch (error) {
+        next(
+            new Error(
+                'controllers/userController.js:setRefreshToken - ' +
+                    error.message
+            )
+        );
+    }
+};
+
+export { login, updatePassword, setRefreshToken };

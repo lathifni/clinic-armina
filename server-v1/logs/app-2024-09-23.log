@@ -1,0 +1,83 @@
+ [LOGGER] 2024-09-23 11:40:07.643 PM error : uncaughtException: Unrecognized datatype for attribute "Promo.id"
+Error: Unrecognized datatype for attribute "Promo.id"
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:726:15
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/lodash/lodash.js:13469:38
+    at /home/thomas/Repository/clinic-armina/server-v1/node_modules/lodash/lodash.js:4967:15
+    at baseForOwn (/home/thomas/Repository/clinic-armina/server-v1/node_modules/lodash/lodash.js:3032:24)
+    at Function.mapValues (/home/thomas/Repository/clinic-armina/server-v1/node_modules/lodash/lodash.js:13468:7)
+    at Promo.init (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/model.js:723:28)
+    at Sequelize.define (/home/thomas/Repository/clinic-armina/server-v1/node_modules/sequelize/lib/sequelize.js:225:11)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/models/promo.js:5:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+ [LOGGER] 2024-09-23 11:43:23.095 PM error : Unexpected field
+ [LOGGER] 2024-09-23 11:44:17.241 PM error : Unexpected field
+ [LOGGER] 2024-09-23 11:44:27.746 PM error : Unexpected field
+ [LOGGER] 2024-09-23 11:44:40.421 PM error : controlllers/promoController.js:createPromo - Cannot read properties of undefined (reading 'length')
+ [LOGGER] 2024-09-23 11:44:48.404 PM error : controlllers/promoController.js:createPromo - Cannot read properties of undefined (reading 'length')
+ [LOGGER] 2024-09-23 11:46:13.192 PM error : controlllers/promoController.js:createPromo - Cannot read properties of undefined (reading 'length')
+ [LOGGER] 2024-09-23 11:48:45.986 PM error : controllers/subLayananController.js:createSubLayanan - Cannot read properties of undefined (reading 'length')
+ [LOGGER] 2024-09-23 11:53:24.411 PM error : uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:20:33
+    at Array.forEach (<anonymous>)
+    at dd (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:15:26)
+    at new Promise (<anonymous>)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:13:24
+    at Array.forEach (<anonymous>)
+    at message (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:9:31)
+    at new Promise (<anonymous>)
+    at dataValid (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:8:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-23 11:53:54.880 PM error : uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:20:33
+    at Array.forEach (<anonymous>)
+    at dd (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:15:26)
+    at new Promise (<anonymous>)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:13:24
+    at Array.forEach (<anonymous>)
+    at message (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:9:31)
+    at new Promise (<anonymous>)
+    at dataValid (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:8:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-23 11:53:54.900 PM error : controlllers/promoController.js:createPromo - Cannot add or update a child row: a foreign key constraint fails (`klinik_armina`.`promo`, CONSTRAINT `promo_ibfk_1` FOREIGN KEY (`layanan_id`) REFERENCES `layanan` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE)
+ [LOGGER] 2024-09-23 11:54:16.537 PM error : uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:20:33
+    at Array.forEach (<anonymous>)
+    at dd (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:15:26)
+    at new Promise (<anonymous>)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:13:24
+    at Array.forEach (<anonymous>)
+    at message (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:9:31)
+    at new Promise (<anonymous>)
+    at dataValid (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:8:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-23 11:56:25.466 PM error : uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:20:33
+    at Array.forEach (<anonymous>)
+    at dd (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:15:26)
+    at new Promise (<anonymous>)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:13:24
+    at Array.forEach (<anonymous>)
+    at message (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:9:31)
+    at new Promise (<anonymous>)
+    at dataValid (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:8:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-23 11:56:25.472 PM error : controlllers/promoController.js:createPromo - Layanan is not defined
+ [LOGGER] 2024-09-23 11:58:44.211 PM error : uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:20:33
+    at Array.forEach (<anonymous>)
+    at dd (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:15:26)
+    at new Promise (<anonymous>)
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:13:24
+    at Array.forEach (<anonymous>)
+    at message (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:9:31)
+    at new Promise (<anonymous>)
+    at dataValid (file:///home/thomas/Repository/clinic-armina/server-v1/src/validation/dataValidation.js:8:27)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+ [LOGGER] 2024-09-23 11:58:44.217 PM error : controlllers/promoController.js:createPromo - Layanan is not defined
+ [LOGGER] 2024-09-23 11:59:41.178 PM error : controlllers/promoController.js:createPromo - Layanan is not defined

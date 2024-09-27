@@ -1,0 +1,317 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "FAQ API",
+      "version": "1.0",
+      "description": "API untuk mengelola FAQ"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "Faq": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "pertanyaan": {
+              "type": "string",
+              "example": "Apa itu API?"
+            },
+            "jawaban": {
+              "type": "string",
+              "example": "API adalah singkatan dari Application Programming Interface."
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-09-19T12:34:56.000Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2024-09-19T12:34:56.000Z"
+            }
+          }
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "message": {
+              "type": "string",
+              "example": "Error message"
+            },
+            "data": {
+              "type": "object",
+              "nullable": true
+            }
+          }
+        }
+      }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "paths": {
+      "/faq": {
+        "get": {
+          "tags": ["FAQ"],
+          "summary": "Get all FAQs",
+          "description": "Retrieve a paginated list of all FAQs with optional search",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page number",
+              "schema": {
+                "type": "integer",
+                "example": 0
+              }
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Number of records per page",
+              "schema": {
+                "type": "integer",
+                "example": 10
+              }
+            },
+            {
+              "name": "search_query",
+              "in": "query",
+              "description": "Search by FAQ question",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Get all FAQs success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Get all FAQs success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Faq"
+                        }
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "totalRows": {
+                        "type": "integer",
+                        "example": 100
+                      },
+                      "totalPage": {
+                        "type": "integer",
+                        "example": 10
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        },
+        "post": {
+          "tags": ["FAQ"],
+          "summary": "Create a new FAQ",
+          "description": "Create a new FAQ entry",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pertanyaan": {
+                      "type": "string",
+                      "example": "Apa itu API?"
+                    },
+                    "jawaban": {
+                      "type": "string",
+                      "example": "API adalah singkatan dari Application Programming Interface."
+                    }
+                  },
+                  "required": ["pertanyaan", "jawaban"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "FAQ successfully created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Faq"
+                  }
+                }
+              }
+            },
+            "400": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "/faq/{id}": {
+        "put": {
+          "tags": ["FAQ"],
+          "summary": "Update an existing FAQ",
+          "description": "Update a FAQ by ID",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the FAQ to update",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pertanyaan": {
+                      "type": "string",
+                      "example": "Apa itu API?"
+                    },
+                    "jawaban": {
+                      "type": "string",
+                      "example": "API adalah singkatan dari Application Programming Interface."
+                    }
+                  },
+                  "required": ["pertanyaan", "jawaban"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "FAQ successfully updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Faq"
+                  }
+                }
+              }
+            },
+            "404": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["FAQ"],
+          "summary": "Delete a FAQ",
+          "description": "Delete a FAQ by ID",
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "ID of the FAQ to delete",
+              "schema": {
+                "type": "integer",
+                "example": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "FAQ successfully deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "FAQ successfully deleted"
+                      },
+                      "data": {
+                        "type": "object",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  }
+  

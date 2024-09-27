@@ -1,0 +1,12 @@
+ [LOGGER] 2024-09-22 12:30:56.919 PM error : uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (node:fs:929:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:27:5)
+    at writeOrBuffer (node:internal/streams/writable:392:12)
+    at _write (node:internal/streams/writable:333:10)
+    at Writable.write (node:internal/streams/writable:337:10)
+    at Console.log (/home/thomas/Repository/clinic-armina/server-v1/node_modules/winston/lib/winston/transports/console.js:87:23)
+    at Console._write (/home/thomas/Repository/clinic-armina/server-v1/node_modules/winston-transport/modern.js:103:17)
+    at doWrite (/home/thomas/Repository/clinic-armina/server-v1/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:390:139)
+    at writeOrBuffer (/home/thomas/Repository/clinic-armina/server-v1/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:381:5)
+    at Writable.write (/home/thomas/Repository/clinic-armina/server-v1/node_modules/winston-transport/node_modules/readable-stream/lib/_stream_writable.js:302:11)

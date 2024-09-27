@@ -1,0 +1,331 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API Tenaga Medis",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "TenagaMedis": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "nama": {
+            "type": "string",
+            "example": "Dr. Ahmad"
+          },
+          "jenis": {
+            "type": "string",
+            "example": "Dokter Umum"
+          },
+          "image": {
+            "type": "string",
+            "example": "/assets/images/tenagaMedis/1695123456789.jpg"
+          },
+          "waktu_mulai": {
+            "type": "string",
+            "format": "time",
+            "example": "08:00:00"
+          },
+          "waktu_selesai": {
+            "type": "string",
+            "format": "time",
+            "example": "16:00:00"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "message": {
+            "type": "string",
+            "example": "Error message"
+          },
+          "data": {
+            "type": "object",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/tenaga-medis": {
+      "get": {
+        "tags": ["Tenaga Medis"],
+        "summary": "Get all Tenaga Medis",
+        "description": "Retrieve a paginated list of all tenaga medis with optional search",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "schema": {
+              "type": "integer",
+              "example": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of records per page",
+            "schema": {
+              "type": "integer",
+              "example": 10
+            }
+          },
+          {
+            "name": "search_query",
+            "in": "query",
+            "description": "Search by tenaga medis name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Get tenaga medis success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/TenagaMedis"
+                      }
+                    },
+                    "limit": {
+                      "type": "integer",
+                      "example": 10
+                    },
+                    "totalRows": {
+                      "type": "integer",
+                      "example": 100
+                    },
+                    "totalPage": {
+                      "type": "integer",
+                      "example": 10
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tenaga Medis"],
+        "summary": "Create new Tenaga Medis",
+        "description": "Create a new Tenaga Medis with image upload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "example": "Dr. Ahmad"
+                  },
+                  "jenis": {
+                    "type": "string",
+                    "example": "Dokter Umum"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Profile image upload (only image files allowed)"
+                  },
+                  "waktu_mulai": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "08:00:00"
+                  },
+                  "waktu_selesai": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "16:00:00"
+                  }
+                },
+                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenagaMedis"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        }
+      }
+    },
+    "/tenaga-medis/{id}": {
+      "patch": {
+        "tags": ["Tenaga Medis"],
+        "summary": "Update existing Tenaga Medis",
+        "description": "Update Tenaga Medis details, optionally upload a new image",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nama": {
+                    "type": "string",
+                    "example": "Dr. Ahmad"
+                  },
+                  "jenis": {
+                    "type": "string",
+                    "example": "Dokter Umum"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "New profile image upload (only image files allowed)"
+                  },
+                  "waktu_mulai": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "08:00:00"
+                  },
+                  "waktu_selesai": {
+                    "type": "string",
+                    "format": "time",
+                    "example": "16:00:00"
+                  }
+                },
+                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenagaMedis"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Tenaga Medis"],
+        "summary": "Delete Tenaga Medis",
+        "description": "Delete an existing Tenaga Medis by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TenagaMedis"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        }
+      }
+    }
+  }
+}

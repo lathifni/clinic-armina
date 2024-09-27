@@ -1,7 +1,6 @@
 import Faq from '../models/faq.js';
 import sequelize from '../utils/db.js';
 import { dataValid } from '../validation/dataValidation.js';
-import fs from 'fs';
 import { Op, where } from 'sequelize';
 
 const createFaq = async (req, res, next) => {

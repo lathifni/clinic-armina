@@ -1,51 +1,52 @@
+import Sunat from '../models/sunat.js';
 import sequelize from '../utils/db.js';
 import { dataValid } from '../validation/dataValidation.js';
-import { Op } from 'sequelize';
 import fs from 'fs';
-import SubLayanan from '../models/subLayanan.js';
+import { Op } from 'sequelize';
 
-const createSubLayanan = async (req, res, next) => {
+const createSunat = async (req, res, next) => {
     const t = await sequelize.transaction();
     const valid = {
         nama: 'required',
         deskripsi: 'required',
-        harga: 'required',
-        layanan_id: 'required',
     };
+
     try {
-        const subLayanan = await dataValid(valid, req.body);
-        if (subLayanan.message.length > 0) {
+        const sunat = await dataValid(valid, req.body);
+
+        if (sunat.message.length > 0) {
             return res.status(400).json({
-                errors: subLayanan.message,
-                message: 'Gagal menambahkan sub Layanan',
+                errors: layanan.message,
+                message: 'Gagal menambahkan layanan',
                 data: null,
             });
         }
 
         if (req.file) {
-            subLayanan.data.image = req.file.path;
+            sunat.data.image = req.file.path;
         }
 
-        const result = await SubLayanan.create(
+        const result = await Sunat.create(
             {
-                ...subLayanan.data,
+                ...sunat.data,
             },
             {
                 transaction: t,
             }
         );
+
         if (!result) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan gagal ditambahkan'],
-                message: 'Gagal menambahkan Sub Layanan',
+                errors: ['Sunat gagal ditambahkan'],
+                message: 'Gagal menambahkan Sunat',
                 data: null,
             });
         } else {
             await t.commit();
             res.status(201).json({
                 errors: null,
-                message: 'Sub Layanan baru berhasil ditambahkan',
+                message: 'Sunat baru berhasil ditambahkan',
                 data: result,
             });
         }
@@ -53,68 +54,66 @@ const createSubLayanan = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:createSubLayanan - ' +
-                    error.message
+                'controllers/sunatController.js/createSunat - ' + error.message
             )
         );
     }
 };
 
-const updateSubLayanan = async (req, res, next) => {
+const updateSunat = async (req, res, next) => {
     const t = await sequelize.transaction();
     const valid = {
         nama: 'required',
         deskripsi: 'required',
-        harga: 'required',
-        layanan_id: 'required',
     };
+
     try {
         const id = req.params.id;
-        const subLayanan = await dataValid(valid, req.body);
+        const sunat = await dataValid(valid, req.body);
 
-        if (subLayanan.message.length > 0) {
+        if (sunat.message.length > 0) {
             return res.status(400).json({
-                errors: layanan.message,
-                message: 'Gagal update layanan',
-                data: layanan.data,
+                errors: sunat.message,
+                message: 'Gagal update Tenaga Medis',
+                data: sunat.data,
             });
         }
 
-        const existingSubLayanan = await SubLayanan.findByPk(id);
+        const existingSunat = await Sunat.findByPk(id);
 
-        if (!existingSubLayanan) {
+        if (!existingSunat) {
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Update Sub Layanan Gagal',
+                errors: ['Tenaga Medis Not Found'],
+                message: 'Update Tenaga Medis Gagal',
                 data: null,
             });
         }
 
         if (req.file) {
-            subLayanan.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
+            sunat.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
 
             // Delete the old profile image if it exists and is different from the new one
             if (
-                existingSubLayanan.image &&
-                existingSubLayanan.image !== subLayanan.data.image
+                existingSunat.image &&
+                existingSunat.image !== sunat.data.image
             ) {
-                fs.unlink(existingSubLayanan.image, (err) => {
+                fs.unlink(existingSunat.image, (err) => {
                     if (err) {
                         console.error(
-                            `Gagal menghapus gambar lama (sub layanan): ${err.message}`
+                            `Gagal menghapus gambar lama (sunat): ${err.message}`
                         );
                     } else {
                         console.log(
-                            `Berhasil menghapus gambar lama (sub layanan): ${existingKategori.image}`
+                            `Berhasil menghapus gambar lama (sunat): ${existingSunat.image}`
                         );
                     }
                 });
             }
         }
 
-        const result = SubLayanan.update(
+        const result = await Sunat.update(
             {
-                ...subLayanan.data,
+                ...sunat.data,
             },
             {
                 where: {
@@ -127,8 +126,8 @@ const updateSubLayanan = async (req, res, next) => {
         if (result[0] === 0) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Update Sub Layanan Gagal',
+                errors: ['Sunat not found'],
+                message: 'Update Sunat Gagal',
                 data: null,
             });
         }
@@ -136,49 +135,48 @@ const updateSubLayanan = async (req, res, next) => {
         await t.commit();
         res.status(200).json({
             errors: [],
-            message: 'Update sub layanan success',
-            data: subLayanan.data,
+            message: 'Update Sunat success',
+            data: sunat.data,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:updateSubLayanan - ' +
-                    error.message
+                'controllers/sunatController.js/updateSunat - ' + error.message
             )
         );
     }
 };
 
-const deleteSubLayanan = async (req, res, next) => {
+const deleteSunat = async (req, res, next) => {
     const t = await sequelize.transaction();
     try {
         const id = req.params.id;
-        const subLayanan = await SubLayanan.findByPk(id);
+        const sunat = await Sunat.findByPk(id, { transaction: t });
 
-        if (!subLayanan) {
+        if (!sunat) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Delete Sub Layanan gagal',
+                errors: ['Sunat not found'],
+                message: 'Delete Sunat gagal',
                 data: null,
             });
         }
 
-        const imagePath = subLayanan.image;
+        const imagePath = sunat.image;
 
-        const subLayananDelete = await SubLayanan.destroy({
+        const sunatDelete = await Sunat.destroy({
             where: {
                 id: id,
             },
             transaction: t,
         });
 
-        if (!subLayananDelete) {
+        if (!sunatDelete) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Delete Sub Layanan gagal',
+                errors: ['Sunat not found'],
+                message: 'Delete Sunat gagal',
                 data: null,
             });
         }
@@ -193,7 +191,7 @@ const deleteSubLayanan = async (req, res, next) => {
                 await t.rollback();
                 return res.status(500).json({
                     errors: ['Failed to delete image'],
-                    message: 'Delete Sub Layanan gagal',
+                    message: 'Delete Sunat gagal',
                     data: null,
                 });
             }
@@ -202,21 +200,20 @@ const deleteSubLayanan = async (req, res, next) => {
         await t.commit();
         return res.status(200).json({
             errors: [],
-            message: 'Delete sub layanan success',
+            message: 'Delete sunat success',
             data: null,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:deleteSubLayanan - ' +
-                    error.message
+                'controllers/sunatController.js/deleteSunat - ' + error.message
             )
         );
     }
 };
 
-const getAllSubLayanan = async (req, res, next) => {
+const getAllSunat = async (req, res, next) => {
     try {
         const page = parseInt(req.query.page) || 0;
         const limit = parseInt(req.query.limit) || 10;
@@ -233,13 +230,13 @@ const getAllSubLayanan = async (req, res, next) => {
             ],
         };
 
-        const totalRows = await SubLayanan.count({
+        const totalRows = await Sunat.count({
             where: whereCondition,
         });
 
         const totalPage = Math.ceil(totalRows / limit);
 
-        const result = await SubLayanan.findAll({
+        const result = await Sunat.findAll({
             where: whereCondition,
             offset: offset,
             limit: limit,
@@ -248,15 +245,15 @@ const getAllSubLayanan = async (req, res, next) => {
 
         if (!result || result.length === 0) {
             return res.status(404).json({
-                errors: ['Sub Layanan tidak ditemukan'],
-                message: 'Get Sub Layanan gagal',
+                errors: ['Sunat tidak ditemukan'],
+                message: 'Get Sunat gagal',
                 data: null,
             });
         }
 
         res.status(200).json({
             errors: [],
-            message: 'Get Sub layanan success',
+            message: 'Get Sunat success',
             data: result,
             limit: limit,
             totalRows: totalRows,
@@ -265,16 +262,37 @@ const getAllSubLayanan = async (req, res, next) => {
     } catch (error) {
         next(
             new Error(
-                'controllers/subLayananController.js:getAllSubLayanan - ' +
-                    error.message
+                'controllers/sunatController.js/getAllSunat - ' + error.message
             )
         );
     }
 };
 
-export {
-    createSubLayanan,
-    updateSubLayanan,
-    deleteSubLayanan,
-    getAllSubLayanan,
+const getSunatById = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const sunat = await Sunat.findByPk(id);
+
+        if (!sunat) {
+            return res.status(404).json({
+                errors: ['Sunat not found'],
+                message: 'Data Sunat Tidak Ditemukan',
+                data: null,
+            });
+        }
+
+        res.status(200).json({
+            errors: [],
+            message: 'Data Sunat berhasil ditemukan',
+            data: sunat,
+        });
+    } catch (error) {
+        next(
+            new Error(
+                'controllers/sunatController.js/getSunatById - ' + error.message
+            )
+        );
+    }
 };
+
+export { createSunat, updateSunat, deleteSunat, getAllSunat, getSunatById };

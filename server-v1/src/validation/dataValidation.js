@@ -1,7 +1,7 @@
 import validator from 'validator';
 import { isExists, sanitization } from './sanitization.js';
 
-const dataValid = async (valid, dt) => {
+const dataValid = async (valid, dt, req) => {
     let pesan = [];
     let dd = [];
     let data = await sanitization(dt);
@@ -15,17 +15,26 @@ const dataValid = async (valid, dt) => {
                 validate.forEach((v) => {
                     switch (v) {
                         case 'required':
-                            if (!isExists(data[key])) {
-                                msg.push(key + ' is required');
-                            } else {
-                                if (
-                                    isExists(data[key]) &&
-                                    validator.isEmpty(data[key])
-                                ) {
+                            if (key === 'image') {
+                                // Check if an image file is uploaded
+                                if (!req.file) {
                                     msg.push(key + ' is required');
+                                }
+                            } else {
+                                // Check for other fields in the body
+                                if (!isExists(data[key])) {
+                                    msg.push(key + ' is required');
+                                } else {
+                                    if (
+                                        isExists(data[key]) &&
+                                        validator.isEmpty(data[key])
+                                    ) {
+                                        msg.push(key + ' is required');
+                                    }
                                 }
                             }
                             break;
+
                         case 'isEmail':
                             if (
                                 isExists(data[key]) &&

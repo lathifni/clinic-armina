@@ -1,51 +1,62 @@
 import sequelize from '../utils/db.js';
+import Galeri from '../models/galeri.js';
 import { dataValid } from '../validation/dataValidation.js';
-import { Op } from 'sequelize';
-import fs from 'fs';
-import SubLayanan from '../models/subLayanan.js';
+import Layanan from '../models/layanan.js';
 
-const createSubLayanan = async (req, res, next) => {
-    const t = await sequelize.transaction();
+const createGaleri = async (req, res, next) => {
+    const t = sequelize.transaction();
     const valid = {
-        nama: 'required',
-        deskripsi: 'required',
-        harga: 'required',
         layanan_id: 'required',
+        image: 'required',
     };
+
     try {
-        const subLayanan = await dataValid(valid, req.body);
-        if (subLayanan.message.length > 0) {
+        const galeri = await dataValid(valid, req.body);
+
+        if (galeri.message.length > 0) {
             return res.status(400).json({
-                errors: subLayanan.message,
-                message: 'Gagal menambahkan sub Layanan',
+                errors: galeri.message,
+                message: 'Gagal menambahkan galeri',
+                data: null,
+            });
+        }
+
+        const layananExists = await Layanan.findByPk(galeri.data.layanan_id);
+        if (!layananExists) {
+            return res.status(400).json({
+                errors: [
+                    `Layanan dengan ID ${galeri.data.layanan_id} tidak ditemukan`,
+                ],
+                message: 'Gagal menambah promo',
                 data: null,
             });
         }
 
         if (req.file) {
-            subLayanan.data.image = req.file.path;
+            galeri.data.image = req.file.path;
         }
 
-        const result = await SubLayanan.create(
+        const result = await Galeri.create(
             {
-                ...subLayanan.data,
+                ...galeri.data,
             },
             {
                 transaction: t,
             }
         );
+
         if (!result) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan gagal ditambahkan'],
-                message: 'Gagal menambahkan Sub Layanan',
+                errors: ['galeri gagal ditambahkan'],
+                message: 'Gagal menambahkan galeri',
                 data: null,
             });
         } else {
             await t.commit();
             res.status(201).json({
                 errors: null,
-                message: 'Sub Layanan baru berhasil ditambahkan',
+                message: 'Galeri baru berhasil ditambahkan',
                 data: result,
             });
         }
@@ -53,68 +64,53 @@ const createSubLayanan = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:createSubLayanan - ' +
-                    error.message
+                'controllers/galerController.js:createGaleri - ' + error.message
             )
         );
     }
 };
 
-const updateSubLayanan = async (req, res, next) => {
+const updateGaleri = async (req, res, next) => {
     const t = await sequelize.transaction();
-    const valid = {
-        nama: 'required',
-        deskripsi: 'required',
-        harga: 'required',
-        layanan_id: 'required',
-    };
     try {
         const id = req.params.id;
-        const subLayanan = await dataValid(valid, req.body);
+        const galeri = req.body;
 
-        if (subLayanan.message.length > 0) {
-            return res.status(400).json({
-                errors: layanan.message,
-                message: 'Gagal update layanan',
-                data: layanan.data,
-            });
-        }
+        const existingGaleri = await Galeri.findByPk(id);
 
-        const existingSubLayanan = await SubLayanan.findByPk(id);
-
-        if (!existingSubLayanan) {
+        if (!existingGaleri) {
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Update Sub Layanan Gagal',
+                errors: ['Galeri Not Found'],
+                message: 'Update Galeri Gagal',
                 data: null,
             });
         }
 
         if (req.file) {
-            subLayanan.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
+            galeri.data.image = req.file.path; // Assuming you're using multer or similar for file uploads
 
             // Delete the old profile image if it exists and is different from the new one
             if (
-                existingSubLayanan.image &&
-                existingSubLayanan.image !== subLayanan.data.image
+                existingGaleri.image &&
+                existingGaleri.image !== galeri.data.image
             ) {
-                fs.unlink(existingSubLayanan.image, (err) => {
+                fs.unlink(existingGaleri.image, (err) => {
                     if (err) {
                         console.error(
-                            `Gagal menghapus gambar lama (sub layanan): ${err.message}`
+                            `Gagal menghapus gambar lama (galeri): ${err.message}`
                         );
                     } else {
                         console.log(
-                            `Berhasil menghapus gambar lama (sub layanan): ${existingKategori.image}`
+                            `Berhasil menghapus gambar lama (galeri): ${existingGaleri.image}`
                         );
                     }
                 });
             }
         }
 
-        const result = SubLayanan.update(
+        const result = await Galeri.update(
             {
-                ...subLayanan.data,
+                ...galeri.data,
             },
             {
                 where: {
@@ -127,8 +123,8 @@ const updateSubLayanan = async (req, res, next) => {
         if (result[0] === 0) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Update Sub Layanan Gagal',
+                errors: ['Galeri not found'],
+                message: 'Update Galeri Gagal',
                 data: null,
             });
         }
@@ -136,49 +132,49 @@ const updateSubLayanan = async (req, res, next) => {
         await t.commit();
         res.status(200).json({
             errors: [],
-            message: 'Update sub layanan success',
-            data: subLayanan.data,
+            message: 'Update galeri success',
+            data: galeri.data,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:updateSubLayanan - ' +
-                    error.message
+                'controllers/galerController.js:updateGaleri - ' + error.message
             )
         );
     }
 };
 
-const deleteSubLayanan = async (req, res, next) => {
-    const t = await sequelize.transaction();
+const deleteGaleri = async (req, res, next) => {
+    const t = sequelize.transaction();
+
     try {
         const id = req.params.id;
-        const subLayanan = await SubLayanan.findByPk(id);
+        const galeri = await Galeri.findByPk(id);
 
-        if (!subLayanan) {
+        if (!galeri) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Delete Sub Layanan gagal',
+                errors: ['Galeri not found'],
+                message: 'Delete Galeri gagal',
                 data: null,
             });
         }
 
-        const imagePath = subLayanan.image;
+        const imagePath = galeri.image;
 
-        const subLayananDelete = await SubLayanan.destroy({
+        const galeriDelete = await Galeri.destroy({
             where: {
                 id: id,
             },
             transaction: t,
         });
 
-        if (!subLayananDelete) {
+        if (!galeriDelete) {
             await t.rollback();
             return res.status(404).json({
-                errors: ['Sub Layanan not found'],
-                message: 'Delete Sub Layanan gagal',
+                errors: ['Galeri not found'],
+                message: 'Delete Galeri gagal',
                 data: null,
             });
         }
@@ -193,7 +189,7 @@ const deleteSubLayanan = async (req, res, next) => {
                 await t.rollback();
                 return res.status(500).json({
                     errors: ['Failed to delete image'],
-                    message: 'Delete Sub Layanan gagal',
+                    message: 'Delete Galeri gagal',
                     data: null,
                 });
             }
@@ -202,21 +198,20 @@ const deleteSubLayanan = async (req, res, next) => {
         await t.commit();
         return res.status(200).json({
             errors: [],
-            message: 'Delete sub layanan success',
+            message: 'Delete galeri success',
             data: null,
         });
     } catch (error) {
         await t.rollback();
         next(
             new Error(
-                'controllers/subLayananController.js:deleteSubLayanan - ' +
-                    error.message
+                'controllers/galerController.js:deleteGaleri - ' + error.message
             )
         );
     }
 };
 
-const getAllSubLayanan = async (req, res, next) => {
+const getAllGaleri = async (req, res, next) => {
     try {
         const page = parseInt(req.query.page) || 0;
         const limit = parseInt(req.query.limit) || 10;
@@ -226,21 +221,28 @@ const getAllSubLayanan = async (req, res, next) => {
         const whereCondition = {
             [Op.or]: [
                 {
-                    nama: {
+                    '$Layanan.name$': {
                         [Op.like]: `%${search}%`,
                     },
                 },
             ],
         };
 
-        const totalRows = await SubLayanan.count({
+        const totalRows = await Galeri.count({
             where: whereCondition,
+            include: [
+                {
+                    model: Layanan,
+                    required: true,
+                },
+            ],
         });
 
         const totalPage = Math.ceil(totalRows / limit);
 
-        const result = await SubLayanan.findAll({
+        const result = await Galeri.findAll({
             where: whereCondition,
+            include: [{ model: Layanan, required: true }],
             offset: offset,
             limit: limit,
             order: [['updated_at', 'DESC']],
@@ -248,15 +250,15 @@ const getAllSubLayanan = async (req, res, next) => {
 
         if (!result || result.length === 0) {
             return res.status(404).json({
-                errors: ['Sub Layanan tidak ditemukan'],
-                message: 'Get Sub Layanan gagal',
+                errors: ['Galeri tidak ditemukan'],
+                message: 'Get Galeri gagal',
                 data: null,
             });
         }
 
         res.status(200).json({
             errors: [],
-            message: 'Get Sub layanan success',
+            message: 'Get Galeri success',
             data: result,
             limit: limit,
             totalRows: totalRows,
@@ -265,16 +267,10 @@ const getAllSubLayanan = async (req, res, next) => {
     } catch (error) {
         next(
             new Error(
-                'controllers/subLayananController.js:getAllSubLayanan - ' +
-                    error.message
+                'controllers/galerController.js:getAllGaleri - ' + error.message
             )
         );
     }
 };
 
-export {
-    createSubLayanan,
-    updateSubLayanan,
-    deleteSubLayanan,
-    getAllSubLayanan,
-};
+export { createGaleri, updateGaleri, deleteGaleri, getAllGaleri };

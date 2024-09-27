@@ -1,0 +1,437 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Sunat API",
+      "version": "1.0.0",
+      "description": "API untuk mengelola data Sunat (Layanan). API ini menyediakan CRUD (Create, Read, Update, Delete) untuk data Sunat."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      },
+      "schemas": {
+        "Sunat": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "nama": {
+              "type": "string",
+              "example": "Sunat Laser"
+            },
+            "deskripsi": {
+              "type": "string",
+              "example": "Sunat laser adalah metode sunat yang menggunakan teknologi laser."
+            },
+            "image": {
+              "type": "string",
+              "example": "/uploads/image.jpg"
+            },
+            "link_youtube": {
+              "type": "string",
+              "example": "https://youtube.com/link-to-video"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-09-20T12:34:56.000Z"
+            },
+            "updated_at": {
+              "type": "string",
+              "format": "date-time",
+              "example": "2023-09-21T12:34:56.000Z"
+            }
+          }
+        },
+        "ErrorResponse": {
+          "type": "object",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": ["Sunat not found"]
+            },
+            "message": {
+              "type": "string",
+              "example": "Data Sunat Tidak Ditemukan"
+            },
+            "data": {
+              "type": "object",
+              "nullable": true,
+              "example": null
+            }
+          }
+        }
+      }
+    },
+    "paths": {
+      "/sunat": {
+        "post": {
+          "tags": ["Sunat"],
+          "summary": "Tambahkan data sunat baru",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nama": {
+                      "type": "string",
+                      "example": "Sunat Laser"
+                    },
+                    "deskripsi": {
+                      "type": "string",
+                      "example": "Deskripsi layanan sunat"
+                    },
+                    "image": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Sunat berhasil ditambahkan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "nullable": true,
+                        "example": null
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Sunat baru berhasil ditambahkan"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/Sunat"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Gagal menambahkan sunat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ]
+        },
+        "get": {
+          "tags": ["Sunat"],
+          "summary": "Ambil semua data sunat",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Nomor halaman",
+              "example": 1
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Batas jumlah data per halaman",
+              "example": 10
+            },
+            {
+              "name": "search_query",
+              "in": "query",
+              "schema": {
+                "type": "string"
+              },
+              "description": "Kata kunci pencarian berdasarkan nama sunat"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Berhasil mendapatkan data sunat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": []
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Get Sunat success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/Sunat"
+                        }
+                      },
+                      "limit": {
+                        "type": "integer",
+                        "example": 10
+                      },
+                      "totalRows": {
+                        "type": "integer",
+                        "example": 100
+                      },
+                      "totalPage": {
+                        "type": "integer",
+                        "example": 10
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Data sunat tidak ditemukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/sunat/{id}": {
+        "get": {
+          "tags": ["Sunat"],
+          "summary": "Ambil data sunat berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID sunat",
+              "example": 1
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Data Sunat berhasil ditemukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": []
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Data Sunat berhasil ditemukan"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/Sunat"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Data sunat tidak ditemukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": ["Sunat"],
+          "summary": "Update data sunat berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID sunat",
+              "example": 1
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nama": {
+                      "type": "string",
+                      "example": "Sunat Laser Updated"
+                    },
+                    "deskripsi": {
+                      "type": "string",
+                      "example": "Deskripsi layanan sunat yang diperbarui"
+                    },
+                    "image": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Sunat berhasil diperbarui",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": []
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Update Sunat success"
+                      },
+                      "data": {
+                        "$ref": "#/components/schemas/Sunat"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Gagal memperbarui sunat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ]
+        },
+        "delete": {
+          "tags": ["Sunat"],
+          "summary": "Hapus data sunat berdasarkan ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID sunat",
+              "example": 1
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Sunat berhasil dihapus",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "errors": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "example": []
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Delete sunat success"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Data sunat tidak ditemukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ErrorResponse"
+                  }
+                }
+              }
+            }
+          },
+          "security": [
+            {
+              "BearerAuth": []
+            }
+          ]
+        }
+      }
+    }
+  }
+  

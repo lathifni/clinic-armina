@@ -1,0 +1,4 @@
+ [LOGGER] 2024-09-27 11:46:07.676 PM error : controlllers/promoController.js:getAllPromo - Op is not defined
+ [LOGGER] 2024-09-27 11:46:19.800 PM error : controlllers/promoController.js:getAllPromo - Unknown column 'Layanan.name' in 'where clause'
+ [LOGGER] 2024-09-27 11:50:01.582 PM error : controlllers/promoController.js:getAllPromo - Unknown column 'Layanan.name' in 'where clause'
+ [LOGGER] 2024-09-27 11:52:07.424 PM error : controlllers/promoController.js:getAllPromo - name is not defined

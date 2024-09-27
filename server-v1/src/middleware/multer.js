@@ -142,10 +142,68 @@ const subLayananUpload = multer({
     },
 });
 
+const sunatStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/sunat/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const sunatUpload = multer({
+    storage: sunatStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+const promoStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/promo/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const promoUpload = multer({
+    storage: sunatStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
 export {
     layananKategoriUpload,
     tentangUpload,
     fasilitasUpload,
     tenagaMedisUpload,
     subLayananUpload,
+    sunatUpload,
+    promoUpload,
 };

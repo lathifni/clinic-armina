@@ -146,7 +146,7 @@ const updateGaleri = async (req, res, next) => {
 };
 
 const deleteGaleri = async (req, res, next) => {
-    const t = sequelize.transaction();
+    const t = await sequelize.transaction();
 
     try {
         const id = req.params.id;

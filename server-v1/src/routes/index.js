@@ -9,6 +9,8 @@ import faqRouter from './faqRoute.js';
 import subLayananRouter from './subLayananRoute.js';
 import sunatRouter from './sunatRoute.js';
 import promoRouter from './promoRoute.js';
+import misiRouter from './misiRoute.js';
+import galeriRouter from './galeriRoute.js';
 
 const route = express.Router();
 
@@ -21,6 +23,8 @@ route.use('/api', faqRouter);
 route.use('/api', subLayananRouter);
 route.use('/api', sunatRouter);
 route.use('/api', promoRouter);
+route.use('/api', misiRouter);
+route.use('/api', galeriRouter);
 
 route.use('*', errorrHandling);
 route.use('*', (req, res) => {

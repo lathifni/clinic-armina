@@ -1,8 +1,9 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API Tenaga Medis",
-    "version": "1.0"
+    "title": "Fasilitas API",
+    "version": "1.0",
+    "description": "API untuk mengelola fasilitas"
   },
   "servers": [
     {
@@ -18,7 +19,7 @@
       }
     },
     "schemas": {
-      "TenagaMedis": {
+      "Fasilitas": {
         "type": "object",
         "properties": {
           "id": {
@@ -27,25 +28,25 @@
           },
           "nama": {
             "type": "string",
-            "example": "Dr. Ahmad"
+            "example": "Kolam Renang"
           },
-          "jenis": {
+          "deskripsi": {
             "type": "string",
-            "example": "Dokter Umum"
+            "example": "Kolam renang dengan fasilitas air hangat"
           },
           "image": {
             "type": "string",
-            "example": "/assets/images/tenagaMedis/1695123456789.jpg"
+            "example": "/assets/images/fasilitas/kolam_renang.jpg"
           },
-          "waktu_mulai": {
+          "createdAt": {
             "type": "string",
-            "format": "time",
-            "example": "08:00:00"
+            "format": "date-time",
+            "example": "2024-09-19T12:34:56.000Z"
           },
-          "waktu_selesai": {
+          "updatedAt": {
             "type": "string",
-            "format": "time",
-            "example": "16:00:00"
+            "format": "date-time",
+            "example": "2024-09-19T12:34:56.000Z"
           }
         }
       },
@@ -76,11 +77,11 @@
     }
   ],
   "paths": {
-    "/tenaga-medis": {
+    "/fasilitas": {
       "get": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Get all Tenaga Medis",
-        "description": "Retrieve a paginated list of all tenaga medis with optional search",
+        "tags": ["Fasilitas"],
+        "summary": "Get all Fasilitas",
+        "description": "Retrieve a paginated list of all Fasilitas with optional search",
         "parameters": [
           {
             "name": "page",
@@ -103,7 +104,7 @@
           {
             "name": "search_query",
             "in": "query",
-            "description": "Search by tenaga medis name",
+            "description": "Search by Fasilitas name",
             "schema": {
               "type": "string"
             }
@@ -111,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "Get all Fasilitas success",
             "content": {
               "application/json": {
                 "schema": {
@@ -125,12 +126,12 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Get tenaga medis success"
+                      "example": "Get all Fasilitas success"
                     },
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/TenagaMedis"
+                        "$ref": "#/components/schemas/Fasilitas"
                       }
                     },
                     "limit": {
@@ -156,9 +157,9 @@
         }
       },
       "post": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Create new Tenaga Medis",
-        "description": "Create a new Tenaga Medis with image upload",
+        "tags": ["Fasilitas"],
+        "summary": "Create a new Fasilitas",
+        "description": "Create a new Fasilitas entry",
         "security": [
           {
             "bearerAuth": []
@@ -173,40 +174,30 @@
                 "properties": {
                   "nama": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Kolam Renang"
                   },
-                  "jenis": {
+                  "deskripsi": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Kolam renang dengan fasilitas air hangat"
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Profile image upload (only image files allowed)"
-                  },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
+                    "description": "Upload fasilitas image"
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["nama"]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Fasilitas successfully created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/Fasilitas"
                 }
               }
             }
@@ -217,11 +208,11 @@
         }
       }
     },
-    "/tenaga-medis/{id}": {
-      "patch": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Update existing Tenaga Medis",
-        "description": "Update Tenaga Medis details, optionally upload a new image",
+    "/fasilitas/{id}": {
+      "put": {
+        "tags": ["Fasilitas"],
+        "summary": "Update an existing Fasilitas",
+        "description": "Update a Fasilitas by ID",
         "security": [
           {
             "bearerAuth": []
@@ -232,6 +223,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "ID of the Fasilitas to update",
             "schema": {
               "type": "integer",
               "example": 1
@@ -247,40 +239,30 @@
                 "properties": {
                   "nama": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Kolam Renang"
                   },
-                  "jenis": {
+                  "deskripsi": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Kolam renang dengan fasilitas air hangat"
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
-                    "description": "New profile image upload (only image files allowed)"
-                  },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
+                    "description": "Upload new image if needed"
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["nama"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Updated",
+            "description": "Fasilitas successfully updated",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/Fasilitas"
                 }
               }
             }
@@ -291,9 +273,9 @@
         }
       },
       "delete": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Delete Tenaga Medis",
-        "description": "Delete an existing Tenaga Medis by ID",
+        "tags": ["Fasilitas"],
+        "summary": "Delete a Fasilitas",
+        "description": "Delete a Fasilitas by ID",
         "security": [
           {
             "bearerAuth": []
@@ -304,6 +286,7 @@
             "name": "id",
             "in": "path",
             "required": true,
+            "description": "ID of the Fasilitas to delete",
             "schema": {
               "type": "integer",
               "example": 1
@@ -312,17 +295,33 @@
         ],
         "responses": {
           "200": {
-            "description": "Deleted",
+            "description": "Fasilitas successfully deleted",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Fasilitas successfully deleted"
+                    },
+                    "data": {
+                      "type": "object",
+                      "nullable": true
+                    }
+                  }
                 }
               }
+            },
+            "404": {
+              "$ref": "#/components/schemas/ErrorResponse"
             }
-          },
-          "404": {
-            "$ref": "#/components/schemas/ErrorResponse"
           }
         }
       }

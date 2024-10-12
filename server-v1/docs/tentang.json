@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "API Tenaga Medis",
+    "title": "API Tentang Kami",
     "version": "1.0"
   },
   "servers": [
@@ -18,34 +18,24 @@
       }
     },
     "schemas": {
-      "TenagaMedis": {
+      "Tentang": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "example": 1
           },
-          "nama": {
+          "title": {
             "type": "string",
-            "example": "Dr. Ahmad"
+            "example": "Tentang Kami"
           },
-          "jenis": {
+          "description": {
             "type": "string",
-            "example": "Dokter Umum"
+            "example": "Deskripsi tentang perusahaan atau organisasi."
           },
           "image": {
             "type": "string",
-            "example": "/assets/images/tenagaMedis/1695123456789.jpg"
-          },
-          "waktu_mulai": {
-            "type": "string",
-            "format": "time",
-            "example": "08:00:00"
-          },
-          "waktu_selesai": {
-            "type": "string",
-            "format": "time",
-            "example": "16:00:00"
+            "example": "/uploads/images/tentang/1695123456789.jpg"
           }
         }
       },
@@ -76,11 +66,11 @@
     }
   ],
   "paths": {
-    "/tenaga-medis": {
+    "/tentang": {
       "get": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Get all Tenaga Medis",
-        "description": "Retrieve a paginated list of all tenaga medis with optional search",
+        "tags": ["Tentang"],
+        "summary": "Get all Tentang records",
+        "description": "Retrieve a paginated list of all Tentang entries with optional search query.",
         "parameters": [
           {
             "name": "page",
@@ -103,7 +93,7 @@
           {
             "name": "search_query",
             "in": "query",
-            "description": "Search by tenaga medis name",
+            "description": "Search by Tentang title",
             "schema": {
               "type": "string"
             }
@@ -125,12 +115,12 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Get tenaga medis success"
+                      "example": "Get Tentang success"
                     },
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/TenagaMedis"
+                        "$ref": "#/components/schemas/Tentang"
                       }
                     },
                     "limit": {
@@ -156,9 +146,9 @@
         }
       },
       "post": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Create new Tenaga Medis",
-        "description": "Create a new Tenaga Medis with image upload",
+        "tags": ["Tentang"],
+        "summary": "Create new Tentang record",
+        "description": "Create a new Tentang entry with optional image upload.",
         "security": [
           {
             "bearerAuth": []
@@ -171,31 +161,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": {
+                  "title": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Tentang Kami"
                   },
-                  "jenis": {
+                  "description": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Deskripsi tentang kami."
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
                     "description": "Profile image upload (only image files allowed)"
-                  },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["title", "description"]
               }
             }
           }
@@ -206,7 +186,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/Tentang"
                 }
               }
             }
@@ -217,11 +197,42 @@
         }
       }
     },
-    "/tenaga-medis/{id}": {
+    "/tentang/{id}": {
+      "get": {
+        "tags": ["Tentang"],
+        "summary": "Get Tentang by ID",
+        "description": "Retrieve a Tentang entry by its ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tentang"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/schemas/ErrorResponse"
+          }
+        }
+      },
       "patch": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Update existing Tenaga Medis",
-        "description": "Update Tenaga Medis details, optionally upload a new image",
+        "tags": ["Tentang"],
+        "summary": "Update Tentang record by ID",
+        "description": "Update an existing Tentang entry by its ID, optionally upload a new image.",
         "security": [
           {
             "bearerAuth": []
@@ -245,31 +256,21 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": {
+                  "title": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Tentang Kami"
                   },
-                  "jenis": {
+                  "description": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Deskripsi baru tentang kami."
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
-                    "description": "New profile image upload (only image files allowed)"
-                  },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
+                    "description": "New image upload (only image files allowed)"
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["title", "description"]
               }
             }
           }
@@ -280,7 +281,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/Tentang"
                 }
               }
             }
@@ -291,9 +292,9 @@
         }
       },
       "delete": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Delete Tenaga Medis",
-        "description": "Delete an existing Tenaga Medis by ID",
+        "tags": ["Tentang"],
+        "summary": "Delete Tentang by ID",
+        "description": "Delete an existing Tentang entry by its ID.",
         "security": [
           {
             "bearerAuth": []
@@ -316,7 +317,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/Tentang"
                 }
               }
             }

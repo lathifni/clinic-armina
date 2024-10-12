@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Galeri API",
+    "description": "API untuk mengelola galeri terkait layanan.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/galeri": {
+      "get": {
+        "summary": "Get All Galeri",
+        "description": "Mendapatkan semua galeri dengan pagination dan pencarian berdasarkan layanan.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Halaman saat ini.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Jumlah item per halaman.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "search_query",
+            "in": "query",
+            "description": "Pencarian berdasarkan nama layanan.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar galeri berhasil didapatkan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Galeri"
+                      }
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "totalRows": {
+                      "type": "integer"
+                    },
+                    "totalPage": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Galeri tidak ditemukan"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Galeri",
+        "description": "Membuat galeri baru untuk layanan.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "layanan_id": {
+                    "type": "integer",
+                    "description": "ID Layanan",
+                    "example": 1
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Gambar galeri"
+                  }
+                },
+                "required": ["layanan_id", "image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Galeri berhasil ditambahkan"
+          },
+          "400": {
+            "description": "Validasi gagal"
+          }
+        }
+      }
+    },
+    "/galeri/{id}": {
+      "put": {
+        "summary": "Update Galeri",
+        "description": "Memperbarui galeri berdasarkan ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "layanan_id": {
+                    "type": "integer",
+                    "description": "ID Layanan",
+                    "example": 1
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Gambar galeri"
+                  }
+                },
+                "required": ["layanan_id", "image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Galeri berhasil diperbarui"
+          },
+          "404": {
+            "description": "Galeri tidak ditemukan"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Galeri",
+        "description": "Menghapus galeri berdasarkan ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Galeri berhasil dihapus"
+          },
+          "404": {
+            "description": "Galeri tidak ditemukan"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Galeri": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "layanan_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "image": {
+            "type": "string",
+            "example": "/uploads/galeri_a.jpg"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}

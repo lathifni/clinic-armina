@@ -7,7 +7,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000"
+        "url": "http://localhost:3000/api"
       }
     ],
     "components": {
@@ -36,7 +36,7 @@
             },
             "image": {
               "type": "string",
-              "example": "/uploads/image.jpg"
+              "example": "/assets/images/sunat/image.jpg"
             },
             "link_youtube": {
               "type": "string",

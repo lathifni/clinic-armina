@@ -1,8 +1,8 @@
 import React from "react";
-import MainSection from "@/components/Home/MainSection";
-import PromoSection from "@/components/Home/PromoSection";
-import QuoteSection from "@/components/Home/QuoteSection";
-import ServiceSection from "@/components/Home/ServiceSection";
+import MainSection from "@/components/home/MainSection";
+import PromoSection from "@/components/home/PromoSection";
+import QuoteSection from "@/components/home/QuoteSection";
+import ServiceSection from "@/components/home/ServiceSection";
 
 export default function Home() {
   return (

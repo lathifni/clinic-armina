@@ -1,9 +1,18 @@
+'use client'
 import { NextPage } from "next";
 import SectionHeader from "@/components/about/SectionHeader";
 import ImageAndTextSection from "@/components/about/ImageAndTextSection";
 import VisionMission from "@/components/about/VisionMission";
 import OrganizationStructure from "@/components/about/OrganizationStructure";
 import ContentWrapper from "@/components/about/ContentWrapper";
+import { useFetchAbout } from "@/features/useFetchAbout";
+
+type AboutSchema = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
 
 const AboutUs: NextPage = () => {
   const vision = [
@@ -16,25 +25,30 @@ const AboutUs: NextPage = () => {
     "Menciptakan lingkungan kerja yang sehat dan harmonis."
   ];
 
+  const { data, isLoading } = useFetchAbout();
+
+  const RenderAbout: NextPage = () => {
+    return (
+      <>
+        {data?.data?.map((aboutItem: AboutSchema , index:number) => (
+          <div className="space-y-8 mb-8" key={aboutItem.id}>
+            <SectionHeader title={aboutItem.title} />
+            <ImageAndTextSection
+              imageUrl={ `${process.env.NEXT_PUBLIC_API_URL}${aboutItem.image}`}
+              altText="profil image"
+              content={aboutItem.description}
+              reverse= {index%2===1}
+            />
+          </div>
+        ))}
+      </>
+    );
+  };
+
   return (
     <ContentWrapper>
-      <SectionHeader title="Profil" />
-      <ImageAndTextSection
-        imageUrl="https://arminaskincare.com/wp-content/uploads/2019/03/cabang-armina-1.jpg"
-        altText="profil image"
-        content="Lorem ipsum dolor sit amet consectetur..."
-      />
-
       <VisionMission vision={vision} mission={mission} />
-
-      <SectionHeader title="Sejarah" />
-      <ImageAndTextSection
-        imageUrl="https://www.jurnalbengkulu.com/sites/default/files/article/2019/06/KLINIK.jpeg"
-        altText="sejarah image"
-        content="Lorem ipsum dolor sit amet consectetur..."
-        reverse ={true}
-      />
-
+      {!isLoading && data ? <RenderAbout /> : <p>Loading...</p>}  T
       <OrganizationStructure />
     </ContentWrapper>
   );

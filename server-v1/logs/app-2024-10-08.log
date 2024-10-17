@@ -1,0 +1,4 @@
+ [LOGGER] 2024-10-08 12:02:56.420 PM error : controllers/userController.js:login - secretOrPrivateKey must have a value
+ [LOGGER] 2024-10-08 12:03:24.200 PM error : controllers/userController.js:login - secretOrPrivateKey must have a value
+ [LOGGER] 2024-10-08 12:04:20.264 PM error : controllers/userController.js:login - secretOrPrivateKey must have a value
+ [LOGGER] 2024-10-08 12:04:20.867 PM error : controllers/userController.js:login - secretOrPrivateKey must have a value

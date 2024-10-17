@@ -3,7 +3,7 @@ import fb from "@/assets/fb.svg";
 import wa from "@/assets/wa.svg";
 import ig from "@/assets/ig.svg";
 import tiktok from "@/assets/tiktok.svg";
-import ContactForm from "@/components/Home/ContactForm";
+import ContactForm from "@/components/home/ContactForm";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,7 +14,7 @@ export default function Footer() {
         <section className="space-y-8">
           <div className="flex flex-col items-center md:items-start md:flex-row md:space-x-8">
             <Image
-              src=""
+              src={`${process.env.NEXT_PUBLIC_API_URL}assets/images/sunat/1728355639267.png`}
               width={1000}
               height={1000}
               className="w-24 h-24 bg-slate-100 rounded-full"

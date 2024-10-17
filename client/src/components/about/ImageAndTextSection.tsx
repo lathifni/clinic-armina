@@ -16,18 +16,18 @@ const ImageAndTextSection: FC<ImageAndTextSectionProps> = ({
 }) => {
   return (
     <section
-      className={`grid grid-cols-1 md:grid-cols-2 gap-8 ${
-        reverse ? "md:flex-row-reverse" : ""
+      className={`flex flex-col justify-center items-center lg:items-start lg:flex-row gap-8 ${
+        reverse ? "lg:flex-row-reverse" : ""
       }`}
     >
       <Image
         src={imageUrl}
         width={1000}
         height={1000}
-        className="rounded-3xl w-full h-56 sm:h-72 md:h-80 lg:h-96 bg-blue-300/50"
+        className="rounded-3xl aspect-square bg-contain h-auto w-1/2 sm:h-auto md:h-autp lg:h-auto bg-blue-300/50"
         alt={altText}
       />
-      <p className="text-justify text-sm sm:text-base lg:text-lg">{content}</p>
+      <p className="text-justify grow basis-1/2  text-sm sm:text-base lg:text-lg">{content}</p>
     </section>
   );
 };

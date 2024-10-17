@@ -1,26 +1,89 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
-    "title": "Galeri API",
-    "description": "API untuk mengelola galeri terkait layanan.",
+    "title": "Promo API",
+    "description": "API to manage Promo including create, update, delete, and fetch operations.\",",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api",
+      "url": "http://localhost:3000",
       "description": "Local server"
     }
   ],
+  "components": {
+    "schemas": {
+      "Promo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "layanan_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "image": {
+            "type": "string",
+            "example": "/assets/images/promo/promo1.jpg"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
   "paths": {
-    "/galeri": {
+    "/api/promo": {
+      "post": {
+        "summary": "Create a new Promo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Image for Promo"
+                  },
+                  "layanan_id": {
+                    "type": "integer",
+                    "description": "ID Layanan",
+                    "example": 1
+                  }
+                },
+                "required": ["layanan_id", "image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Promo berhasil ditambahkan"
+          },
+          "400": {
+            "description": "Validasi gagal"
+          }
+        }
+      },
       "get": {
-        "summary": "Get All Galeri",
+        "summary": "Get All Promo",
         "description": "Mendapatkan semua galeri dengan pagination dan pencarian berdasarkan layanan.",
         "parameters": [
           {
             "name": "page",
             "in": "query",
-            "description": "Halaman saat ini.",
+            "description": "Halaman saat ini",
             "required": false,
             "schema": {
               "type": "integer",
@@ -30,7 +93,7 @@
           {
             "name": "limit",
             "in": "query",
-            "description": "Jumlah item per halaman.",
+            "description": "Jumlah item per halaman",
             "required": false,
             "schema": {
               "type": "integer",
@@ -40,7 +103,7 @@
           {
             "name": "search_query",
             "in": "query",
-            "description": "Pencarian berdasarkan nama layanan.",
+            "description": "Pencarian berdasarkan nama layanan",
             "required": false,
             "schema": {
               "type": "string"
@@ -49,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Daftar galeri berhasil didapatkan",
+            "description": "Daftar Promo berhasil didapatkan",
             "content": {
               "application/json": {
                 "schema": {
@@ -67,7 +130,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Galeri"
+                        "$ref": "#/components/schemas/Promo"
                       }
                     },
                     "limit": {
@@ -85,50 +148,15 @@
             }
           },
           "404": {
-            "description": "Galeri tidak ditemukan"
-          }
-        }
-      },
-      "post": {
-        "summary": "Create Galeri",
-        "description": "Membuat galeri baru untuk layanan.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "layanan_id": {
-                    "type": "integer",
-                    "description": "ID Layanan",
-                    "example": 1
-                  },
-                  "image": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "Gambar galeri"
-                  }
-                },
-                "required": ["layanan_id", "image"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Galeri berhasil ditambahkan"
-          },
-          "400": {
-            "description": "Validasi gagal"
+            "description": "Promo tidak ditemukan"
           }
         }
       }
     },
-    "/galeri/{id}": {
+    "/api/promo/{id}": {
       "put": {
-        "summary": "Update Galeri",
-        "description": "Memperbarui galeri berdasarkan ID.",
+        "summary": "Update Promo",
+        "description": "Memperbarui promo berdasarkan ID.",
         "parameters": [
           {
             "name": "id",
@@ -154,7 +182,7 @@
                   "image": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Gambar galeri"
+                    "description": "Gambar promo"
                   }
                 },
                 "required": ["layanan_id", "image"]
@@ -164,16 +192,16 @@
         },
         "responses": {
           "200": {
-            "description": "Galeri berhasil diperbarui"
+            "description": "Promo berhasil diperbarui"
           },
           "404": {
-            "description": "Galeri tidak ditemukan"
+            "description": "Promo tidak ditemukan"
           }
         }
       },
       "delete": {
-        "summary": "Delete Galeri",
-        "description": "Menghapus galeri berdasarkan ID.",
+        "summary": "Delete Promo",
+        "description": "Menghapus promo berdasarkan ID",
         "parameters": [
           {
             "name": "id",
@@ -186,39 +214,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Galeri berhasil dihapus"
+            "description": "Promo berhasil dihapus"
           },
           "404": {
-            "description": "Galeri tidak ditemukan"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Galeri": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "layanan_id": {
-            "type": "integer",
-            "example": 1
-          },
-          "image": {
-            "type": "string",
-            "example": "/assets/images/galeri/galeri_a.jpg"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time"
+            "description": "Promo tidak ditemukan"
           }
         }
       }

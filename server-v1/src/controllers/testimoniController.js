@@ -4,7 +4,7 @@ import Testimoni from '../models/testimoni.js';
 import sequelize from '../utils/db.js';
 import { dataValid } from '../validation/dataValidation.js';
 
-const creteTestimoni = async (req, res, next) => {
+const createTestimoni = async (req, res, next) => {
     const t = await sequelize.transaction();
     const valid = {
         nama: 'required',
@@ -39,7 +39,7 @@ const creteTestimoni = async (req, res, next) => {
             },
             {
                 transaction: t,
-            }
+            },
         );
 
         if (!result) {
@@ -62,8 +62,8 @@ const creteTestimoni = async (req, res, next) => {
         next(
             new Error(
                 'controllers/testimoniController.js:createTestimoni - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -107,7 +107,7 @@ const updateTestimoni = async (req, res, next) => {
                     id: id,
                 },
                 transaction: t,
-            }
+            },
         );
 
         if (result[0] === 0) {
@@ -129,8 +129,8 @@ const updateTestimoni = async (req, res, next) => {
         next(
             new Error(
                 'controllers/testimoniController.js:updateTestimoni - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -177,8 +177,8 @@ const deleteTestimoni = async (req, res, next) => {
         next(
             new Error(
                 'controllers/testimoniController.js:deleteTestimoni - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -245,10 +245,10 @@ const getAllTestimoni = async (req, res, next) => {
         next(
             new Error(
                 'controllers/galerController.js:getAllTestimoni - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
 
-export { creteTestimoni, updateTestimoni, deleteTestimoni, getAllTestimoni };
+export { createTestimoni, updateTestimoni, deleteTestimoni, getAllTestimoni };

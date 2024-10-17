@@ -187,7 +187,63 @@ const promoStorage = multer.diskStorage({
 });
 
 const promoUpload = multer({
-    storage: sunatStorage,
+    storage: promoStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+const strukturStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/struktur/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const strukturUpload = multer({
+    storage: strukturStorage,
+    limits: { fileSize: 1024 * 1024 * 5 },
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only images are allowed'), false);
+        }
+    },
+});
+
+const galeriStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = 'assets/images/promo/';
+
+        // Check if the directory exists, if not, create it
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+
+const galeriUpload = multer({
+    storage: galeriStorage,
     limits: { fileSize: 1024 * 1024 * 5 },
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image/')) {
@@ -206,4 +262,6 @@ export {
     subLayananUpload,
     sunatUpload,
     promoUpload,
+    strukturUpload,
+    galeriUpload,
 };

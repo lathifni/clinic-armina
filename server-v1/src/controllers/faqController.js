@@ -1,7 +1,7 @@
 import Faq from '../models/faq.js';
 import sequelize from '../utils/db.js';
 import { dataValid } from '../validation/dataValidation.js';
-import { Op, where } from 'sequelize';
+import { Op } from 'sequelize';
 
 const createFaq = async (req, res, next) => {
     const t = await sequelize.transaction();
@@ -27,7 +27,7 @@ const createFaq = async (req, res, next) => {
             },
             {
                 transaction: t,
-            }
+            },
         );
 
         if (!result) {
@@ -49,8 +49,8 @@ const createFaq = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/faqController.js:createFaq - ' + error.message
-            )
+                'controllers/faqController.js:createFaq - ' + error.message,
+            ),
         );
     }
 };
@@ -93,7 +93,7 @@ const updateFaq = async (req, res, next) => {
                     id: id,
                 },
                 transaction: t,
-            }
+            },
         );
 
         if (result[0] === 0) {
@@ -115,8 +115,8 @@ const updateFaq = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/faqController.js:updateFaq - ' + error.message
-            )
+                'controllers/faqController.js:updateFaq - ' + error.message,
+            ),
         );
     }
 };
@@ -162,8 +162,8 @@ const deleteFaq = async (req, res, next) => {
         await t.rollback();
         next(
             new Error(
-                'controllers/faqController.js:deleteFaq - ' + error.message
-            )
+                'controllers/faqController.js:deleteFaq - ' + error.message,
+            ),
         );
     }
 };
@@ -217,8 +217,8 @@ const getAllFaq = async (req, res, next) => {
     } catch (error) {
         next(
             new Error(
-                'controllers/faqController.js:getAllFaq - ' + error.message
-            )
+                'controllers/faqController.js:getAllFaq - ' + error.message,
+            ),
         );
     }
 };

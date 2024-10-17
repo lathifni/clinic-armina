@@ -1,12 +1,14 @@
 {
-  "openapi": "3.0.3",
+  "openapi": "3.1.0",
   "info": {
-    "title": "API Tenaga Medis",
-    "version": "1.0"
+    "title": "API Sub Layanan",
+    "description": "API untuk mengelola sub Layanan (CRUD)",
+    "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api"
+      "url": "http://localhost:3000",
+      "description": "Local server"
     }
   ],
   "components": {
@@ -18,41 +20,43 @@
       }
     },
     "schemas": {
-      "TenagaMedis": {
+      "SubLayanan": {
         "type": "object",
         "properties": {
           "id": {
             "type": "integer",
             "example": 1
           },
+          "layanan_id": {
+            "type": "integer",
+            "example": 1
+          },
           "nama": {
             "type": "string",
-            "example": "Dr. Ahmad"
+            "example": "Sub Layanan 1"
           },
-          "jenis": {
+          "deskripsi": {
             "type": "string",
-            "example": "Dokter Umum"
+            "example": "Ini adalah deskripsi"
           },
           "image": {
             "type": "string",
-            "example": "/assets/images/tenagaMedis/1695123456789.jpg"
+            "example": "/assets/images/subLayanan/137126313.jpg"
           },
-          "waktu_mulai": {
+          "created_at": {
             "type": "string",
-            "format": "time",
-            "example": "08:00:00"
+            "format": "date-time"
           },
-          "waktu_selesai": {
+          "updated_at": {
             "type": "string",
-            "format": "time",
-            "example": "16:00:00"
+            "format": "date-time"
           }
         }
       },
       "ErrorResponse": {
         "type": "object",
         "properties": {
-          "errors": {
+          "errrors": {
             "type": "array",
             "items": {
               "type": "string"
@@ -76,10 +80,10 @@
     }
   ],
   "paths": {
-    "/tenaga-medis": {
+    "/api/sub-layanan": {
       "get": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Get all Tenaga Medis",
+        "tags": ["Sub Layanan"],
+        "summary": "Get All Sub Layanan",
         "description": "Retrieve a paginated list of all tenaga medis with optional search",
         "parameters": [
           {
@@ -103,7 +107,7 @@
           {
             "name": "search_query",
             "in": "query",
-            "description": "Search by tenaga medis name",
+            "description": "Search by sub Layanan name",
             "schema": {
               "type": "string"
             }
@@ -125,12 +129,12 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Get tenaga medis success"
+                      "example": "Get Sub Layanan success"
                     },
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/TenagaMedis"
+                        "$ref": "#/components/schemas/SubLayanan"
                       }
                     },
                     "limit": {
@@ -156,9 +160,9 @@
         }
       },
       "post": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Create new Tenaga Medis",
-        "description": "Create a new Tenaga Medis with image upload",
+        "tags": ["Sub Layanan"],
+        "summary": "Create New Sub Layanan",
+        "description": "Create a New Sub Layanan",
         "security": [
           {
             "bearerAuth": []
@@ -171,31 +175,29 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "layanan_id": {
+                    "type": "integer",
+                    "example": 1
+                  },
                   "nama": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Sub Layanan 1"
                   },
-                  "jenis": {
+                  "deskripsi": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Deskripsi sub layanan 1"
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
                     "description": "image upload (only image files allowed)"
                   },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
+                  "harga": {
+                    "type": "float",
+                    "example": "10000"
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["nama", "deskripsi", "harga", "layanan_id"]
               }
             }
           }
@@ -206,7 +208,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/SubLayanan"
                 }
               }
             }
@@ -217,11 +219,11 @@
         }
       }
     },
-    "/tenaga-medis/{id}": {
+    "/api/sub-layanan/{id}": {
       "patch": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Update existing Tenaga Medis",
-        "description": "Update Tenaga Medis details, optionally upload a new image",
+        "tags": ["Sub Layanan"],
+        "summary": "Update existing Sub Layanan",
+        "description": "Update Sub Layanan details, optionally upload a new image",
         "security": [
           {
             "bearerAuth": []
@@ -247,40 +249,37 @@
                 "properties": {
                   "nama": {
                     "type": "string",
-                    "example": "Dr. Ahmad"
+                    "example": "Sub Layanan 1"
                   },
-                  "jenis": {
+                  "deskripsi": {
                     "type": "string",
-                    "example": "Dokter Umum"
+                    "example": "Ini deskripsi"
+                  },
+                  "harga": {
+                    "type": "float",
+                    "example": "10000"
                   },
                   "image": {
                     "type": "string",
                     "format": "binary",
-                    "description": "New profile image upload (only image files allowed)"
+                    "description": "image upload (only image files allowed)"
                   },
-                  "waktu_mulai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "08:00:00"
-                  },
-                  "waktu_selesai": {
-                    "type": "string",
-                    "format": "time",
-                    "example": "16:00:00"
+                  "layanan_id": {
+                    "type": "integer",
+                    "example": 1
                   }
                 },
-                "required": ["nama", "jenis", "waktu_mulai", "waktu_selesai"]
+                "required": ["nama", "deskripsi", "harga", "layanan_id"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Updated",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/SubLayanan"
                 }
               }
             }
@@ -291,9 +290,9 @@
         }
       },
       "delete": {
-        "tags": ["Tenaga Medis"],
-        "summary": "Delete Tenaga Medis",
-        "description": "Delete an existing Tenaga Medis by ID",
+        "tags": ["Sub Layanan"],
+        "summary": "Delete Sub Layanan",
+        "description": "Delete an existing Sub Layanan By ID",
         "security": [
           {
             "bearerAuth": []
@@ -316,7 +315,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TenagaMedis"
+                  "$ref": "#/components/schemas/SubLayanan"
                 }
               }
             }

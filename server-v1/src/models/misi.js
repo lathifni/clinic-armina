@@ -1,8 +1,8 @@
 import sequelize from '../utils/db.js';
 import { Sequelize } from 'sequelize';
 
-const Klinik = sequelize.define(
-    'Klinik',
+const Misi = sequelize.define(
+    'Misi',
     {
         id: {
             type: Sequelize.INTEGER,
@@ -10,24 +10,16 @@ const Klinik = sequelize.define(
             autoIncrement: true,
             primaryKey: true,
         },
-        nama: {
+        isi: {
             type: Sequelize.STRING,
-            allowNull: false,
-        },
-        image: {
-            type: Sequelize.STRING,
-            allowNull: false,
-        },
-        visi: {
-            type: Sequelize.TEXT,
             allowNull: false,
         },
     },
     {
-        tableName: 'klinik',
+        tableName: 'misi',
         underscored: true,
         timestamps: false,
     }
 );
 
-export default Klinik;
+export default Misi;

@@ -9,7 +9,7 @@ const createSubLayanan = async (req, res, next) => {
     const valid = {
         nama: 'required',
         deskripsi: 'required',
-        harga: 'required',
+        harga: 'required,isNumeric',
         layanan_id: 'required',
     };
     try {
@@ -32,7 +32,7 @@ const createSubLayanan = async (req, res, next) => {
             },
             {
                 transaction: t,
-            }
+            },
         );
         if (!result) {
             await t.rollback();
@@ -54,8 +54,8 @@ const createSubLayanan = async (req, res, next) => {
         next(
             new Error(
                 'controllers/subLayananController.js:createSubLayanan - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -101,11 +101,11 @@ const updateSubLayanan = async (req, res, next) => {
                 fs.unlink(existingSubLayanan.image, (err) => {
                     if (err) {
                         console.error(
-                            `Gagal menghapus gambar lama (sub layanan): ${err.message}`
+                            `Gagal menghapus gambar lama (sub layanan): ${err.message}`,
                         );
                     } else {
                         console.log(
-                            `Berhasil menghapus gambar lama (sub layanan): ${existingKategori.image}`
+                            `Berhasil menghapus gambar lama (sub layanan): ${existingKategori.image}`,
                         );
                     }
                 });
@@ -121,7 +121,7 @@ const updateSubLayanan = async (req, res, next) => {
                     id: id,
                 },
                 transaction: t,
-            }
+            },
         );
 
         if (result[0] === 0) {
@@ -144,8 +144,8 @@ const updateSubLayanan = async (req, res, next) => {
         next(
             new Error(
                 'controllers/subLayananController.js:updateSubLayanan - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -210,8 +210,8 @@ const deleteSubLayanan = async (req, res, next) => {
         next(
             new Error(
                 'controllers/subLayananController.js:deleteSubLayanan - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };
@@ -266,8 +266,8 @@ const getAllSubLayanan = async (req, res, next) => {
         next(
             new Error(
                 'controllers/subLayananController.js:getAllSubLayanan - ' +
-                    error.message
-            )
+                    error.message,
+            ),
         );
     }
 };

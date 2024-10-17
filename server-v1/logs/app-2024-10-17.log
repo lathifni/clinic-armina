@@ -1,0 +1,20 @@
+ [LOGGER] 2024-10-17 11:47:10.620 AM error : uncaughtException: testimo is not defined
+ReferenceError: testimo is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/routes/index.js:29:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+ [LOGGER] 2024-10-17 11:47:27.616 AM error : uncaughtException: testimoniRouter is not defined
+ReferenceError: testimoniRouter is not defined
+    at file:///home/thomas/Repository/clinic-armina/server-v1/src/routes/index.js:29:5
+    at ModuleJob.run (node:internal/modules/esm/module_job:195:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:336:24)
+    at async loadESM (node:internal/process/esm_loader:34:7)
+    at async handleMainPromise (node:internal/modules/run_main:106:12)
+ [LOGGER] 2024-10-17 12:25:22.282 PM error : controllers/testimoniController.js:createTestimoni - Expected a string but received a number
+ [LOGGER] 2024-10-17 12:25:47.690 PM error : controllers/testimoniController.js:createTestimoni - Expected a string but received a number
+ [LOGGER] 2024-10-17 12:26:53.678 PM error : controllers/testimoniController.js:createTestimoni - Expected a string but received a number
+ [LOGGER] 2024-10-17 12:29:03.581 PM error : controllers/testimoniController.js:createTestimoni - Expected a string but received a number
+ [LOGGER] 2024-10-17 12:29:54.540 PM error : controllers/testimoniController.js:createTestimoni - Expected a string but received a number
+ [LOGGER] 2024-10-17 12:30:18.275 PM error : controllers/testimoniController.js:createTestimoni - Data truncated for column 'layanan_id' at row 1

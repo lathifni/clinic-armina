@@ -50,8 +50,16 @@ const dataValid = async (valid, dt, req) => {
                             ) {
                                 msg.push(
                                     key +
-                                        ' most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol'
+                                        ' most be at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 symbol',
                                 );
+                            }
+                            break;
+                        case 'isNumeric':
+                            if (
+                                isExists(data[key]) &&
+                                !validator.isNumeric(data[key])
+                            ) {
+                                msg.push(key + ' must be number ');
                             }
                             break;
                         default:

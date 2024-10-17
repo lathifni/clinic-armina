@@ -1,0 +1,226 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Promo API",
+    "description": "API to manage Promo including create, update, delete, and fetch operations.\",",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Promo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "layanan_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "image": {
+            "type": "string",
+            "example": "/assets/images/promo/promo1.jpg"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/api/promo": {
+      "post": {
+        "summary": "Create a new Promo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Image for Promo"
+                  },
+                  "layanan_id": {
+                    "type": "integer",
+                    "description": "ID Layanan",
+                    "example": 1
+                  }
+                },
+                "required": ["layanan_id", "image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Promo berhasil ditambahkan"
+          },
+          "400": {
+            "description": "Validasi gagal"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get All Promo",
+        "description": "Mendapatkan semua galeri dengan pagination dan pencarian berdasarkan layanan.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Halaman saat ini",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 0
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Jumlah item per halaman",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          },
+          {
+            "name": "search_query",
+            "in": "query",
+            "description": "Pencarian berdasarkan nama layanan",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Daftar Promo berhasil didapatkan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Promo"
+                      }
+                    },
+                    "limit": {
+                      "type": "integer"
+                    },
+                    "totalRows": {
+                      "type": "integer"
+                    },
+                    "totalPage": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Promo tidak ditemukan"
+          }
+        }
+      }
+    },
+    "/api/promo/{id}": {
+      "put": {
+        "summary": "Update Promo",
+        "description": "Memperbarui promo berdasarkan ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "layanan_id": {
+                    "type": "integer",
+                    "description": "ID Layanan",
+                    "example": 1
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Gambar promo"
+                  }
+                },
+                "required": ["layanan_id", "image"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Promo berhasil diperbarui"
+          },
+          "404": {
+            "description": "Promo tidak ditemukan"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Promo",
+        "description": "Menghapus promo berdasarkan ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Promo berhasil dihapus"
+          },
+          "404": {
+            "description": "Promo tidak ditemukan"
+          }
+        }
+      }
+    }
+  }
+}

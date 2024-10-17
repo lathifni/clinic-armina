@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 // Log the static file directory
 console.log(
     'Serving static files from: ',
-    path.join(__dirname, '..', 'assets')
+    path.join(__dirname, '..', 'assets'),
 );
 app.use(cors())
 
@@ -25,7 +25,7 @@ app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 
 app.use(appMiddleware);
 
-sequelize.sync({ alter: true });
+await sequelize.sync({ alter: true });
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

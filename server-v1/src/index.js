@@ -4,7 +4,7 @@ import appMiddleware from './middleware/index.js';
 import sequelize from './utils/db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-
+import cors from 'cors';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,6 +18,7 @@ console.log(
     'Serving static files from: ',
     path.join(__dirname, '..', 'assets')
 );
+app.use(cors())
 
 // Serve static files from 'assets' located outside 'src'
 app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));

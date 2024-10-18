@@ -49,7 +49,7 @@ const Method: NextPage<Props> = ({}) => {
     'https://www.youtube.com/embed/video-4',
   ];
   return (
-    <section className="container py-16">
+    <section className="container max-w-5xl py-16">
     <Tabs tabs={tabs} onTabClick={setActiveTab} />
     <ContentSection
       title={contentData[activeTab].title}

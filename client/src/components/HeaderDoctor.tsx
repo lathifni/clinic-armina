@@ -11,7 +11,7 @@ type NavProps = {
   }>;
 };
 
-export default function Header({ links }: NavProps) {
+export default function HeaderDoctor({ links }: NavProps) {
   const pathname = usePathname();
 
   const RenderLink = () => {

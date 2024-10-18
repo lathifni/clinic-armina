@@ -3,16 +3,18 @@
 import { useFetchLayanan } from "@/features/useFetchLayanan";
 import {ImageSkeleton} from "@/components/skeleton/ImageSkeleton";
 import Image from "next/image";
+import { baseUrl } from "@/lib/baseUrl";
 
 type LayananSchema = {
-  id: number;
+id: number;
   nama: string;
   image: string;
   deskripsi: string;
 };
 export default function ServiceSection() {
-  const { data, isLoading } = useFetchLayanan();
+  const { data, isLoading } = useFetchLayanan()
  ;
+ 
   const renderLayanan = () => {
     return data?.data?.map((layanan: LayananSchema) => (
       <div
@@ -21,7 +23,7 @@ export default function ServiceSection() {
       >
         <Image
           className="max-w-full h-auto"
-          src={`${process.env.NEXT_PUBLIC_API_URL}${layanan.image}`}
+          src={`${baseUrl}${layanan.image}`}
           alt={`img layanan ${layanan.id}`}
           width={500}
           height={500}

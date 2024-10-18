@@ -1,8 +1,8 @@
-import React, { Suspense } from "react";
+import React from "react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { links } from "@/data/link/links"; 
+import { linkDoctor } from "@/data/link/linkDoctor"; 
 
 export default function PageLayout({
   children,
@@ -11,10 +11,8 @@ export default function PageLayout({
 }) {
   return (
     <>
-      <Header links={links} />
-      <Suspense fallback={<p>loading...</p>}>
+      <Header links={linkDoctor} />
       <main className="bg-blueLigth">{children}</main>
-      </Suspense>
       <Footer />
     </>
   );

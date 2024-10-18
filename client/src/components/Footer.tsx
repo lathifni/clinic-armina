@@ -4,18 +4,19 @@ import wa from "@/assets/wa.svg";
 import ig from "@/assets/ig.svg";
 import tiktok from "@/assets/tiktok.svg";
 import ContactForm from "@/components/home/ContactForm";
+import { baseUrl } from "@/lib/baseUrl";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-blueCustom text-white">
+  <footer className="bg-blueCustom text-white"> 
       <div className="container mx-auto px-4 py-8 space-y-8 md:grid md:grid-cols-2 md:gap-8">
         <section className="space-y-8">
           <div className="flex flex-col items-center md:items-start md:flex-row md:space-x-8">
             <Image
-              src={`${process.env.NEXT_PUBLIC_API_URL}assets/images/sunat/1728355639267.png`}
-              width={1000}
+              src={`${baseUrl}assets/images/sunat/1728355639267.png`}
+              width={1000}  
               height={1000}
               className="w-24 h-24 bg-slate-100 rounded-full"
               alt="icon footer"

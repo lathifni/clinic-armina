@@ -35,3 +35,7 @@
 .title{
   font-family: 'Irish Grover'
 }
+
+body{
+  min-width: 390px;
+}

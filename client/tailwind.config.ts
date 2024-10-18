@@ -13,13 +13,7 @@ const config: Config = {
   theme: {
     container:{
       center: true,
-      padding: '8rem',
-      screens: {
-        sm: '640px',
-        md: '768px',
-        lg: '1024px',
-        xl: '1280px',
-      },
+    padding: '2rem',
     },
     extend: {
       backgroundImage: {
@@ -39,6 +33,9 @@ const config: Config = {
       },
       boxShadow:{
         custom : "0 4px 4px rgba(0, 0, 0, 0.25)"
+      },
+      height:{
+        'calc-auto': 'calc-size(auto)'
       }
       
     },

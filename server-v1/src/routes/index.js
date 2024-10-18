@@ -7,7 +7,6 @@ import fasilitasRouter from './fasilitasRoute.js';
 import tenagaMedisRouter from './tenagaMedisRoute.js';
 import faqRouter from './faqRoute.js';
 import subLayananRouter from './subLayananRoute.js';
-import sunatRouter from './sunatRoute.js';
 import promoRouter from './promoRoute.js';
 import misiRouter from './misiRoute.js';
 import galeriRouter from './galeriRoute.js';
@@ -23,7 +22,6 @@ const routers = [
     tenagaMedisRouter,
     faqRouter,
     subLayananRouter,
-    sunatRouter,
     promoRouter,
     misiRouter,
     galeriRouter,

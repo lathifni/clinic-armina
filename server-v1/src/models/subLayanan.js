@@ -27,12 +27,16 @@ const SubLayanan = sequelize.define(
             type: Sequelize.STRING,
             allowNull: true,
         },
+        link_youtube: {
+            type: Sequelize.STRING,
+            allowNull: true,
+        },
     },
     {
         tableName: 'sub_layanan',
         underscored: true,
         timestamps: true,
-    }
+    },
 );
 
 SubLayanan.belongsTo(Layanan, {

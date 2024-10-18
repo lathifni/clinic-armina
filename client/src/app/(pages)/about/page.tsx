@@ -6,6 +6,7 @@ import VisionMission from "@/components/about/VisionMission";
 import OrganizationStructure from "@/components/about/OrganizationStructure";
 import ContentWrapper from "@/components/about/ContentWrapper";
 import { useFetchAbout } from "@/features/useFetchAbout";
+import { baseUrl } from "@/lib/baseUrl";
 
 type AboutSchema = {
   id: string;
@@ -34,7 +35,7 @@ const AboutUs: NextPage = () => {
           <div className="space-y-8 mb-8" key={aboutItem.id}>
             <SectionHeader title={aboutItem.title} />
             <ImageAndTextSection
-              imageUrl={ `${process.env.NEXT_PUBLIC_API_URL}${aboutItem.image}`}
+              imageUrl={ `${baseUrl}${aboutItem.image}`}
               altText="profil image"
               content={aboutItem.description}
               reverse= {index%2===1}

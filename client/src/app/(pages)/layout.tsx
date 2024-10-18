@@ -2,8 +2,7 @@ import React from "react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { links } from "@/data/link/links";
-import { Metadata } from "next";
+import { links } from "@/data/link/links"; 
 
 export default function PageLayout({
   children,
@@ -13,7 +12,7 @@ export default function PageLayout({
   return (
     <>
       <Header links={links} />
-      <main>{children}</main>
+      <main className="bg-blueLigth">{children}</main>
       <Footer />
     </>
   );

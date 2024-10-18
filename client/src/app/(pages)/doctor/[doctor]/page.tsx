@@ -1,17 +1,30 @@
 "use client";
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Image from "next/image";
+import { GiDoctorFace } from "react-icons/gi";
+import { useFetchBrocures } from "@/features/useFetchBrocures";
+import { baseUrl } from "@/lib/baseUrl";
 
-interface Props {}
+interface BrochureSchema{
+  id: number;
+  image: string;
+  layanan_id: number;
+}
 
-const Practitioner: NextPage<Props> = ({}) => {
+const Practitioner  = ({ params }: { params: { doctor: number } }) => {
+
+  const {data, isLoading,isError} = useFetchBrocures()
+
   const [activeSlide, setActiveSlide] = useState(0);
+  const {doctor} = params 
+  const brocure = data?.data?.filter((b:BrochureSchema) => b.layanan_id == doctor )
 
+ 
   const settings = {
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow:brocure?.length<=3?1:3,
     speed: 500,
     centerMode: true,
     slidesToScroll: 1,
@@ -45,17 +58,17 @@ const Practitioner: NextPage<Props> = ({}) => {
 
   return (
     <section className="container pb-16 space-y-12">
-      <header className=" bg-blueLigth border-4 rounded-2xl p-3 border-lightGreen">
-        <div className="slider-container container bg-white rounded-xl  ">
+      <header className=" bg-blueLigth border-4 max-w-5xl h-calc-auto transition duration-300 ease-linear mx-auto rounded-2xl p-3  border-lightGreen">
+        <div className="slider-container container  mx-auto bg-white rounded-xl  ">
           <Slider {...settings}>
-            {[1, 2, 3, 4, 5, 6].map((_, index) => (
-              <div className="py-8" key={index}>
+            {brocure?.map((data:BrochureSchema ,index:number) => (
+              <div className="py-8 " key={data.id}>
                 <Image
-                  src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
-                  alt={`Brochure ${index}`}
+                  src={baseUrl+data.image}
+                  alt={`Brochure ${data.id}`}
                   height={1500}
                   width={1500}
-                  className={`rounded w-max h-auto transition-transform duration-300 ${
+                  className={`rounded w-max max-h-72 mx-auto h-auto transition-transform duration-300 ${
                     index === activeSlide ? "scale-[1.05]" : "scale-95"
                   }`}
                 />

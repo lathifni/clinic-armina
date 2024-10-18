@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import './globals.css'
-import { FaViacoin } from "react-icons/fa";
+import './globals.css'  
 import { ReactQueryClientProvider } from "@/components/ReactQueryClientProvider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

@@ -31,7 +31,7 @@ export default function Header({ links }: NavProps) {
   };
 
   return (
-    <header className="shadow-md bg-white h-auto px-4 sm:px-10 md:px-20 lg:px-40 py-4 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+    <header className="shadow-md bg-white z-50 sticky top-0 w-full h-auto px-4 sm:px-10 md:px-20 lg:px-40 py-2 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
       <Link href="/" className="text-center sm:text-left">
         <h1 className="text-[#0766AD] font-bold text-2xl sm:text-3xl lg:text-4xl">
           Armina

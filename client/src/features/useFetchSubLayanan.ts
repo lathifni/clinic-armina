@@ -5,7 +5,7 @@ export const useFetchSubLayanan =()=>{
     return useQuery({
         queryKey:['sub-layanan'],
         queryFn:async()=>{
-            const {data} = await axiosInstance('api/sublayanan')
+            const {data} = await axiosInstance('api/sub-layanan')
             return data;
         }
     })

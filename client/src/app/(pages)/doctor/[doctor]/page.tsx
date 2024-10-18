@@ -6,25 +6,43 @@ import Image from "next/image";
 import { GiDoctorFace } from "react-icons/gi";
 import { useFetchBrocures } from "@/features/useFetchBrocures";
 import { baseUrl } from "@/lib/baseUrl";
+import { useFetchSubLayanan } from "@/features/useFetchSubLayanan";
 
-interface BrochureSchema{
+interface BrochureSchema {
   id: number;
   image: string;
   layanan_id: number;
 }
 
-const Practitioner  = ({ params }: { params: { doctor: number } }) => {
+type SubLayanan = {
+  id: number;
+  nama: string;
+  layanan_id: number;
+};
 
-  const {data, isLoading,isError} = useFetchBrocures()
-
+const Practitioner = ({ params }: { params: { doctor: number } }) => {
+  const {
+    data: fetchBrochure,
+    isLoading: brochureLoading,
+    isError: brochureError,
+  } = useFetchBrocures();
+  const {
+    data: fetchSubLayanan,
+    isLoading: subLayananLoading,
+    isError: subLayananError,
+  } = useFetchSubLayanan();
   const [activeSlide, setActiveSlide] = useState(0);
-  const {doctor} = params 
-  const brocure = data?.data?.filter((b:BrochureSchema) => b.layanan_id == doctor )
+  const { doctor } = params;
+  const brocure = fetchBrochure?.data?.filter(
+    (b: BrochureSchema) => b.layanan_id == doctor
+  );
+  const subLayanan = fetchSubLayanan?.data?.filter(
+    (b: SubLayanan) => b.layanan_id == doctor
+  );
 
- 
   const settings = {
     infinite: true,
-    slidesToShow:brocure?.length<=3?1:3,
+    slidesToShow: brocure?.length <= 3 ? 1 : 3,
     speed: 500,
     centerMode: true,
     slidesToScroll: 1,
@@ -56,15 +74,26 @@ const Practitioner  = ({ params }: { params: { doctor: number } }) => {
     },
   ];
 
+  const RenderLayanan = () => {
+    return subLayanan?.map((data: SubLayanan) => (
+      <p
+        key={data.id}
+        className="bg-blueCustom text-white rounded-3xl px-20 font-bold py-1 shadow-custom"
+      >
+        {data.nama}
+      </p>
+    ));
+  };
+
   return (
     <section className="container pb-16 space-y-12">
       <header className=" bg-blueLigth border-4 max-w-5xl h-calc-auto transition duration-300 ease-linear mx-auto rounded-2xl p-3  border-lightGreen">
         <div className="slider-container container  mx-auto bg-white rounded-xl  ">
           <Slider {...settings}>
-            {brocure?.map((data:BrochureSchema ,index:number) => (
+            {brocure?.map((data: BrochureSchema, index: number) => (
               <div className="py-8 " key={data.id}>
                 <Image
-                  src={baseUrl+data.image}
+                  src={baseUrl + data.image}
                   alt={`Brochure ${data.id}`}
                   height={1500}
                   width={1500}
@@ -84,18 +113,7 @@ const Practitioner  = ({ params }: { params: { doctor: number } }) => {
               Layanan
             </h2>
           </header>
-          <p className="bg-blueCustom text-white rounded-3xl px-20 font-bold py-1 shadow-custom">
-            medical check up
-          </p>
-          <p className="bg-blueCustom text-white rounded-3xl px-16 font-bold py-1 shadow-custom">
-            medical check up
-          </p>
-          <p className="bg-blueCustom text-white rounded-3xl px-16 font-bold py-1 shadow-custom">
-            medical check up
-          </p>
-          <p className="bg-blueCustom text-white rounded-3xl px-16 font-bold py-1 shadow-custom">
-            medical check up
-          </p>
+          {RenderLayanan()}
         </article>
       </section>
       <section>
@@ -104,7 +122,7 @@ const Practitioner  = ({ params }: { params: { doctor: number } }) => {
 
           <div className="">
             <hr className="border-b-[3px] border-purple-500 w-12 rounded-sm mx-auto  " />
-            <hr className="w-40 mx-auto border-t-2"/>
+            <hr className="w-40 mx-auto border-t-2" />
           </div>
           <Slider {...settingsTestimoni}>
             {testimonials.map((testimonial, index) => (
@@ -112,7 +130,6 @@ const Practitioner  = ({ params }: { params: { doctor: number } }) => {
                 <div className="max-w-xl bg-gray-50 p-8 mx-auto shadow-custom rounded-md ">
                   <div className="flex items-center mb-4">
                     <div className="w-16 h-16 bg-purple-200 rounded-full flex items-center justify-center">
-                      
                       <span className="text-4xl text-purple-500">😊</span>
                     </div>
                     <div className="ml-4">
@@ -129,38 +146,39 @@ const Practitioner  = ({ params }: { params: { doctor: number } }) => {
         </div>
       </section>
       <section className="rounded-3xl text-5xl text-center bg-blueLigth shadow-[2px_2px_16px_1px_#0766AD] space-y-12 p-16">
-        
-          <h2 className="mx-auto w-fit p-8 border-b border-[#0766AD]"> Galeri</h2>
-        
-        <article className="grid grid-cols-3 justify-items-center   ">
-        <Image
-                  src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
-                  alt="galery"
-                  height={1500}
-                  width={1500}
-                  className="size-48 "
-                />
-        <Image
-                  src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
-                  alt="galery"
-                  height={1500}
-                  width={1500}
-                  className="size-48 "
-                />
-        <Image
-                  src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
-                  alt="galery"
-                  height={1500}
-                  width={1500}
-                  className="size-48 "
-                />
-        </article>
-        <h2 className="mx-auto w-fit px-8 border-t h-0 overflow-hidden border-[#0766AD] text-transparent" >Galeri</h2>
-        
-          <p className="text-base text-right text-blueCustom font-serif">selengkapnya &gt; &gt; </p>
-        
-      </section>
+        <h2 className="mx-auto w-fit p-8 border-b border-[#0766AD]"> Galeri</h2>
 
+        <article className="grid grid-cols-3 justify-items-center   ">
+          <Image
+            src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
+            alt="galery"
+            height={1500}
+            width={1500}
+            className="size-48 "
+          />
+          <Image
+            src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
+            alt="galery"
+            height={1500}
+            width={1500}
+            className="size-48 "
+          />
+          <Image
+            src="https://www.its.ac.id/wp-content/uploads/2023/08/brosur-FKK-b.jpeg"
+            alt="galery"
+            height={1500}
+            width={1500}
+            className="size-48 "
+          />
+        </article>
+        <h2 className="mx-auto w-fit px-8 border-t h-0 overflow-hidden border-[#0766AD] text-transparent">
+          Galeri
+        </h2>
+
+        <p className="text-base text-right text-blueCustom font-serif">
+          selengkapnya &gt; &gt;{" "}
+        </p>
+      </section>
     </section>
   );
 };

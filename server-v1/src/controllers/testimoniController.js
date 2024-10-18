@@ -1,4 +1,4 @@
-import { where } from 'sequelize';
+import { Op, where } from 'sequelize';
 import Layanan from '../models/layanan.js';
 import Testimoni from '../models/testimoni.js';
 import sequelize from '../utils/db.js';
@@ -198,7 +198,7 @@ const getAllTestimoni = async (req, res, next) => {
                     },
                 },
                 {
-                    name: {
+                    nama: {
                         [Op.like]: `%${search}%`,
                     },
                 },

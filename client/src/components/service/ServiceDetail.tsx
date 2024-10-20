@@ -13,8 +13,8 @@ export const ServiceDetail= ({nama,deskripsi,harga}:ServiceProps)=>{
      {deskripsi}
       </p>
     </div>
-    <section className="space-y-1 flex flex-col md:flex-row justify-between items-center font-bold  py-8">
-      <p className="max-md:border-y-2 max-md:w-full text-center md:text-left">{harga}</p>
+    <section className="space-y-1 flex flex-col md:flex-row justify-between  items-center md:items-send md font-bold  pt-8">
+      <p className="max-md:border-y-2 max-md:w-full text-center md:text-left">Rp {harga.toLocaleString()}</p>
       <button className="capitalize text-white px-4 font-normal py-1 w-full rounded md:w-fit md:rounded-2xl bg-blueCustom">Buat janji</button>
     </section>
   </article>

@@ -15,8 +15,8 @@ const Tabs: React.FC<TabsProps> = ({ tabs, onTabClick }) => {
 
   return (
     <nav className=" mx-auto border-y-2  ">
-      <ul className=" grid grid-cols-4 divide-x  ">
-        {tabs.map((tab, index) => (
+      <ul className=   {`grid grid-cols-${tabs?.length} divide-x`}  >
+        {tabs?.map((tab, index) => (
           <li key={index}>
             <button
               className={`py-2 px-4 w-full  focus:outline-none font-bold ${

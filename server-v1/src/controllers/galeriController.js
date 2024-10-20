@@ -2,6 +2,7 @@ import sequelize from '../utils/db.js';
 import Galeri from '../models/galeri.js';
 import { dataValid } from '../validation/dataValidation.js';
 import Layanan from '../models/layanan.js';
+import { Op } from 'sequelize';
 
 const createGaleri = async (req, res, next) => {
     const t = sequelize.transaction();

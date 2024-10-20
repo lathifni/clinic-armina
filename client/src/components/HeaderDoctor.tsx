@@ -2,20 +2,26 @@
 "use client";
 import clsx from "clsx";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { usePathname ,useParams } from "next/navigation";
+import { linkDoctor } from "@/data/link/linkDoctor";
+import { useFetchSubLayanan } from "@/features/useFetchSubLayanan"; 
+import { useFilterData } from "@/features/useFilterData";
 type NavProps = {
-  links: Array<{
     label: string;
     href: string;
-  }>;
 };
 
-export default function HeaderDoctor({ links }: NavProps) {
+export default function HeaderDoctor() {
   const pathname = usePathname();
-
+  const path = pathname.split('/').slice(1,3).join('/');
+  const {data} = useFetchSubLayanan()
+  const id= useParams().doctor.toString() 
+   const filteredData = useFilterData(data?.data,id)
+   const checkLinkYt = filteredData?.every((data:any)=>data.link_youtube===null)
+ 
+  const links = linkDoctor(path) 
   const RenderLink = () => {
-    return links.map((link: any) => (
+    return links.map((link: NavProps) => (
       <Link
         href={link.href}
         key={link.label}
@@ -42,6 +48,17 @@ export default function HeaderDoctor({ links }: NavProps) {
       </Link>
       <nav className="flex flex-col sm:flex-row text-sm space-y-2 sm:space-y-0 sm:space-x-8 capitalize">
         <RenderLink />
+        {
+          !checkLinkYt&&(     <Link
+          href={"/"+path+"/method"} 
+          className={clsx(
+            "hover:text-blue-800 ",
+            pathname ==="/"+path+"/method" && "text-blue-600"
+          )}
+        >
+          Method
+        </Link>)
+        }
       </nav>
     </header>
   );

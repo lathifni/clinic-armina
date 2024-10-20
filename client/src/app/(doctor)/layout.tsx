@@ -2,7 +2,7 @@ import React from "react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { linkDoctor } from "@/data/link/linkDoctor"; 
+import HeaderDoctor from "@/components/HeaderDoctor";
 
 export default function PageLayout({
   children,
@@ -11,7 +11,7 @@ export default function PageLayout({
 }) {
   return (
     <>
-      <Header links={linkDoctor} />
+      <HeaderDoctor  />
       <main className="bg-blueLigth">{children}</main>
       <Footer />
     </>

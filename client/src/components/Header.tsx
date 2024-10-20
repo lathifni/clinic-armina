@@ -1,5 +1,7 @@
 // components/Header.tsx
 "use client";
+ 
+import { links } from "@/data/link/links";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,9 +13,8 @@ type NavProps = {
   }>;
 };
 
-export default function Header({ links }: NavProps) {
-  const pathname = usePathname();
-
+export default function Header() {
+  const pathname = usePathname(); 
   const RenderLink = () => {
     return links.map((link: any) => (
       <Link

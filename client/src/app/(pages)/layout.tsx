@@ -11,7 +11,7 @@ export default function PageLayout({
 }) {
   return (
     <>
-      <Header links={links} />
+      <Header   />
       <Suspense fallback={<p>loading...</p>}>
       <main className="bg-blueLigth">{children}</main>
       </Suspense>

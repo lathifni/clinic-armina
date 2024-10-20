@@ -9,6 +9,7 @@ export const ServiceImage = ({src}:{src:string})=>{
       width={1000}
       height={1000}
       className="w-max"
+      priority
     />
   </figure>
 }

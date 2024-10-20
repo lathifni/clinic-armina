@@ -1,14 +1,18 @@
-export const linkDoctor = [
+export const linkDoctor = (path:string|number)=>{
+  return  [
+    
     {
-      label: "Home",
-      href: "/",
+      label: "home",
+      href: "/"+path,
     },
     {
       label: "Layanan",
-      href: "/about",
+      href: "/"+path+ "/service",
     },
     {
-      label: "Metode",
-      href: "/method",
+      label: "Galeri",
+      href: "/"+path+ "/gallery",
     },
+ 
   ];
+} 

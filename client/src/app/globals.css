@@ -39,3 +39,16 @@
 body{
   min-width: 390px;
 }
+
+.transition-ease-in-out{
+  @apply transition-all duration-300 ease-in-out 
+}
+.transition-linear{
+  @apply transition-all duration-300 ease-linear
+}
+.transition-ease-in{
+  @apply transition-all duration-300 ease-in 
+}
+.transition-ease-out{
+  @apply transition-all duration-300 ease-out 
+}

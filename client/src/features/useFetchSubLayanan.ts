@@ -7,6 +7,9 @@ export const useFetchSubLayanan =()=>{
         queryFn:async()=>{
             const {data} = await axiosInstance('api/sub-layanan')
             return data;
-        }
+        },
+        staleTime: 60000 * 60*15,
+        gcTime: 1000 * 60 * 30
+        
     })
 }

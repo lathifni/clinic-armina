@@ -14,13 +14,13 @@ type MedicSchema = {
 export const MedicalItem = ({ medic }: { medic: MedicSchema }) => {
   return (
     <article className="col-span-1   rounded-lg bg-blueCustom overflow-hidden">
-      <div className="w-full h-64 overflow-hidden">
+      <div className="w-full h-64 relative overflow-hidden">
         <Image
           src={`${baseUrl}${medic.image}`}
           alt={medic.nama}
           height={1000}
           width={1000}
-          className="w-max bg-cover h-auto bg-blueLigth"
+          className="w-max bg-cover h-auto object-cover bg-blueLigth"
         />
     </div>
       <div className="px-4 py-5 font-bold text-left h-fit text-lg">

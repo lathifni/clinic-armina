@@ -22,6 +22,8 @@ interface TableRow {
   [key: string]: string | number | File | undefined;
 }
 
+type InputValue = string | number | readonly string[] | undefined;
+
 const AdminTablePage = ({ params }: { params: { table: string } }) => {
   const { table } = params;
   const link = table.replaceAll("_", "-");
@@ -29,6 +31,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [initialValues, setInitialValues] = useState<TableRow>({});
 
+  const { data: layanan } = useFetchTables("layanan");
   const { data, isLoading, refetch } = useFetchTables(link);
   const { mutate: create, isPending: createPending } = useCreateTable({
     link,
@@ -71,7 +74,9 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
     onSubmit: (values) => {
       const formData = new FormData();
       for (const key in values) {
-        formData.append(key, values[key]);
+        if (values[key] !== undefined) {
+          formData.append(key, values[key] as string | Blob);
+        }
       }
       if (isEditing) {
         edit(formData);
@@ -101,6 +106,44 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
     });
   };
 
+  const renderFormField = (field: string) => {
+    if (field === "layanan_id") {
+      return (
+        <select
+          className="w-full border rounded p-2"
+          name={field}
+          id={field}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values[field] as InputValue || ""}
+          required
+        >
+          <option value="">Select layanan</option>
+          {layanan?.map((l:any) => (
+            <option key={l.id} value={l.id}>
+              {l["name"]}
+            </option>
+          ))}
+        </select>
+      );
+    }
+
+    return (
+      <input
+        name={field}
+        onChange={field === "image" ? handleFileChange : formik.handleChange}
+        onBlur={formik.handleBlur}
+        className={`w-full border p-2 rounded ${
+          field === "id" && "outline-none bg-slate-200 border-slate-400"
+        }`}
+        type={field === "image" ? "file" : "text"}
+        value={field === "image" ? undefined : (formik.values[field] as InputValue) || ""}
+        required={!(field === "image" && isEditing)}
+        readOnly={field === "id"}
+      />
+    );
+  };
+
   return (
     <AuthProvider>
       <Profile />
@@ -114,26 +157,15 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
         encType="multipart/form-data"
         className="mb-6 bg-white p-4 shadow rounded"
       >
-{data &&
-  Object.keys(data[0]).map((field) => (
-    <div key={field} className="mb-4">
-      <label className="block text-gray-700 mb-2 capitalize">
-        {field.replaceAll("_", " ")}
-      </label>
-      <input
-        name={field}
-        onChange={field === "image" ? handleFileChange : formik.handleChange}
-        className={`w-full border p-2 rounded ${
-          field === "id" && "outline-none bg-slate-200 border-slate-400"
-        }`}
-        type={field === "image" ? "file" : "text"}
-        {...(field !== "image" && { value: formik.values[field] || "" })}
-        required={!(field === "image" && isEditing)}
-        readOnly={field === "id"}
-      />
-    </div>
-  ))}
-
+        {data &&
+          Object.keys(data[0]).map((field) => (
+            <div key={field} className="mb-4">
+              <label className="block text-gray-700 mb-2 capitalize">
+                {field.replaceAll("_", " ")}
+              </label>
+              {renderFormField(field)}
+            </div>
+          ))}
 
         <button
           type="submit"

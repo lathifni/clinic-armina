@@ -18,8 +18,16 @@ import { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { baseUrl } from "@/lib/baseUrl";
 
+// Improved type definitions
 interface TableRow {
+  id: string;
   [key: string]: string | number | File | undefined;
+}
+
+interface LayananData {
+  id: string;
+  name: string;
+  [key: string]: string | number;
 }
 
 type InputValue = string | number | readonly string[] | undefined;
@@ -29,10 +37,10 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
   const link = table.replaceAll("_", "-");
   const label = table.replaceAll("_", " ");
   const [isEditing, setIsEditing] = useState(false);
-  const [initialValues, setInitialValues] = useState<TableRow>({});
+  const [initialValues, setInitialValues] = useState<TableRow>({ id: '' });
 
-  const { data: layanan } = useFetchTables("layanan");
-  const { data, isLoading, refetch } = useFetchTables(link);
+  const { data: layanan } = useFetchTables<LayananData[]>("layanan");
+  const { data, isLoading, refetch } = useFetchTables<TableRow[]>(link);
   const { mutate: create, isPending: createPending } = useCreateTable({
     link,
     onSuccess: () => {
@@ -64,11 +72,11 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
     if (isEditing && data?.length) {
       setInitialValues(data[0]);
     } else {
-      setInitialValues({});
+      setInitialValues({ id: '' });
     }
   }, [data, isEditing]);
 
-  const formik = useFormik({
+  const formik = useFormik<TableRow>({
     initialValues: initialValues,
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -99,11 +107,31 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
   };
 
   const handleDelete = (row: TableRow) => {
-    confirmDeleteAlert(label, row.id as string).then((result) => {
+    confirmDeleteAlert(label, row.id).then((result) => {
       if (result.isConfirmed) {
-        deleteMutate(row.id as string);
+        deleteMutate(row.id);
       }
     });
+  };
+
+  const renderCellContent = (key: string, value: string | number | File | undefined) => {
+    if (key === "image" && typeof value === "string") {
+      return (
+        <Image
+          src={baseUrl + value}
+          className="size-40 mx-auto"
+          width={500}
+          height={500}
+          alt="image"
+        />
+      );
+    }
+
+    if (value instanceof File) {
+      return value.name;
+    }
+
+    return value;
   };
 
   const renderFormField = (field: string) => {
@@ -119,9 +147,9 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
           required
         >
           <option value="">Select layanan</option>
-          {layanan?.map((l:any) => (
+          {layanan?.map((l) => (
             <option key={l.id} value={l.id}>
-              {l["name"]}
+              {l.name}
             </option>
           ))}
         </select>
@@ -157,7 +185,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
         encType="multipart/form-data"
         className="mb-6 bg-white p-4 shadow rounded"
       >
-        {data &&
+        {data?.[0] &&
           Object.keys(data[0]).map((field) => (
             <div key={field} className="mb-4">
               <label className="block text-gray-700 mb-2 capitalize">
@@ -170,6 +198,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
         <button
           type="submit"
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          disabled={createPending || editPending}
         >
           {isEditing ? "Update" : "Create"}
         </button>
@@ -183,7 +212,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
           <table className="bg-white border w-full border-gray-200">
             <thead>
               <tr>
-                {Object.keys(data?.[0] || {}).map((key) => (
+                {data?.[0] && Object.keys(data[0]).map((key) => (
                   <th
                     key={key}
                     className={`px-4 text-left capitalize py-2 border-b bg-gray-50 ${
@@ -197,29 +226,16 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((row: TableRow, index: number) => (
+              {data?.map((row, index) => (
                 <tr key={index} className="border-b">
-                  {Object.keys(row).map((key) => (
+                  {Object.entries(row).map(([key, value]) => (
                     <td
                       key={key}
                       className={`px-4 py-2 ${
                         key === "layanan_id" && "text-center"
                       } border-b text-ellipsis`}
                     >
-                      {key === "image" && typeof row[key] === "string" ? (
-                        <Image
-                          src={baseUrl + row[key]}
-                          className="size-40 mx-auto"
-                          width={500}
-                          height={500}
-                          alt="image"
-                        />
-                      ) : typeof row[key] === "string" ||
-                        typeof row[key] === "number" ? (
-                        row[key]
-                      ) : (
-                        row[key] instanceof File && row[key].name
-                      )}
+                      {renderCellContent(key, value)}
                     </td>
                   ))}
                   <td className="px-2 py-2">
@@ -228,6 +244,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
                         className="text-blue-500 border-2 rounded p-2 border-blue-500 flex items-center transition-ease-in-out hover:bg-blue-500 hover:text-white"
                         onClick={() => handleEdit(row)}
                         title="Edit"
+                        disabled={editPending}
                       >
                         <FaEdit />
                       </button>
@@ -235,6 +252,7 @@ const AdminTablePage = ({ params }: { params: { table: string } }) => {
                         className="text-red-500 border-2 rounded p-2 border-red-500 flex items-center transition-ease-in-out hover:bg-red-500 hover:text-white"
                         onClick={() => handleDelete(row)}
                         title="Delete"
+                        disabled={deletePending}
                       >
                         <FaTrash />
                       </button>

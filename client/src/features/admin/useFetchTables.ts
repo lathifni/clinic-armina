@@ -1,8 +1,8 @@
 import { axiosInstance } from "@/lib/axiosInstance";
 import { useQuery } from "@tanstack/react-query"
 
-export const useFetchTables = (link:string)=>{
-    return useQuery({
+export const useFetchTables = <T>(link:string)=>{
+    return useQuery<T>({
         queryKey: ['tables', link],
         queryFn: async () => {
             let {data} = await axiosInstance.get('/api/'+link)

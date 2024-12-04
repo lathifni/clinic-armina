@@ -1,0 +1,197 @@
+[
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "Pemeriksaan umum",
+        "deskripsi": "Kami menyediakan layanan pemeriksaan kesehatan umum untuk memastikan kondisi kesehatan Anda secara menyeluruh. Dokter akan melakukan pemeriksaan fisik, mendiskusikan keluhan, serta memberikan diagnosis dan saran pengobatan yang tepat untuk menjaga atau memulihkan kesehatan Anda."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "sunat modern",
+        "deskripsi": "Layanan sunat modern kami dirancang untuk memberikan pengalaman yang aman, nyaman, dan minim rasa sakit. Menggunakan teknologi terkini, prosedur ini dilakukan oleh tenaga medis berpengalaman untuk menjamin hasil yang optimal dan proses pemulihan yang cepat."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "perawatan luka",
+        "deskripsi": "Kami menawarkan perawatan luka yang profesional, mulai dari luka ringan hingga luka kronis. Dengan teknik steril yang ketat dan peralatan medis terkini, kami memastikan luka Anda dirawat dengan baik untuk mencegah infeksi dan mempercepat proses penyembuhan."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "bedah minor",
+        "deskripsi": "Untuk kebutuhan tindakan medis kecil seperti pengangkatan benjolan, jahitan luka, atau prosedur minor lainnya, layanan bedah minor kami tersedia dengan standar medis tinggi. Prosedur dilakukan dengan aman dan cepat, memberikan kenyamanan bagi pasien."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "home care",
+        "deskripsi": "Kami menghadirkan layanan home care untuk Anda yang membutuhkan perawatan kesehatan di rumah. Tim medis kami siap membantu pemeriksaan kesehatan, perawatan luka, pemberian obat, atau tindakan medis lainnya langsung di tempat Anda, memberikan kemudahan dan kenyamanan maksimal."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "pemeriksaan kesehatan",
+        "deskripsi": "Layanan pemeriksaan kesehatan menyeluruh kami mencakup cek tekanan darah, kadar gula darah, kolesterol, dan parameter kesehatan lainnya. Pemeriksaan ini bertujuan untuk mendeteksi dini risiko penyakit dan memberikan panduan untuk hidup lebih sehat."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Umum",
+        "nama": "suntik vitamin",
+        "deskripsi": "Tingkatkan daya tahan tubuh Anda dengan layanan suntik vitamin kami. Dengan formulasi yang disesuaikan kebutuhan tubuh, suntik vitamin ini membantu menjaga kesehatan, meningkatkan energi, dan memulihkan kebugaran secara efektif.okee"
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "Pemeriksaan gigi",
+        "deskripsi": "Layanan pemeriksaan gigi kami bertujuan untuk mendeteksi masalah kesehatan gigi dan mulut sejak dini. Dokter gigi akan memeriksa kondisi gigi, gusi, dan mulut Anda secara menyeluruh, memberikan saran perawatan atau pengobatan yang sesuai untuk menjaga kesehatan oral Anda."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "Scalling",
+        "deskripsi": "Hilangkan plak dan karang gigi dengan layanan scaling kami. Proses ini membantu mencegah penyakit gusi, menjaga kebersihan gigi, dan memberikan senyum yang lebih sehat dan segar. Dilakukan oleh dokter berpengalaman untuk hasil optimal."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "dental spa",
+        "deskripsi": "Rasakan perawatan gigi yang nyaman dengan dental spa kami. Layanan ini dirancang untuk memberikan pengalaman relaksasi sambil menjaga kebersihan dan kesehatan gigi Anda. Pilihan yang sempurna untuk perawatan estetika dan kesehatan mulut."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "pencabutan gigi",
+        "deskripsi": "Kami menawarkan layanan pencabutan gigi dengan prosedur aman dan minim rasa sakit. Proses dilakukan oleh dokter gigi profesional menggunakan peralatan modern untuk memastikan kenyamanan Anda selama tindakan."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "penambalan gigi",
+        "deskripsi": "Layanan penambalan gigi kami membantu mengatasi kerusakan gigi akibat gigi berlubang atau patah. Dengan bahan tambalan berkualitas tinggi, dokter gigi kami akan mengembalikan fungsi dan tampilan gigi Anda dengan hasil yang alami."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "pembuatan gigi palsu",
+        "deskripsi": "Kembalikan kepercayaan diri Anda dengan layanan pembuatan gigi palsu. Kami menyediakan berbagai jenis gigi palsu yang disesuaikan dengan kebutuhan Anda, baik untuk kenyamanan penggunaan maupun estetika."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "perawatan saluran akar",
+        "deskripsi": "Layanan perawatan saluran akar kami dirancang untuk menyelamatkan gigi yang rusak parah akibat infeksi atau kerusakan dalam. Prosedur ini dilakukan secara teliti untuk menghilangkan rasa sakit dan mempertahankan struktur gigi Anda."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "pencabutan gigi bungsu",
+        "deskripsi": "Atasi masalah gigi bungsu dengan layanan pencabutan gigi bungsu kami. Prosedur ini dilakukan dengan hati-hati untuk memastikan kenyamanan pasien dan mencegah komplikasi di masa mendatang."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "pencabutan gigi pada anak",
+        "deskripsi": "Kami memberikan layanan pencabutan gigi anak dengan pendekatan ramah anak. Dokter gigi kami memastikan anak merasa nyaman dan tidak takut selama proses berlangsung, memberikan pengalaman yang positif."
+    },
+    {
+        "layanan_nama": "Pelayanan Dokter Gigi",
+        "nama": "pemasangan aksesoris gigi lainnya",
+        "deskripsi": "Kami juga menyediakan layanan pemasangan aksesoris gigi seperti kawat gigi, veneer, atau hiasan gigi lainnya. Dengan teknologi terkini, aksesoris ini dipasang dengan presisi untuk mempercantik senyum Anda."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "KB",
+        "deskripsi": "Layanan Keluarga Berencana kami menawarkan berbagai pilihan metode kontrasepsi yang aman dan efektif untuk membantu Anda merencanakan keluarga sesuai kebutuhan. Konsultasi dilakukan oleh tenaga medis berpengalaman untuk memberikan solusi yang sesuai dengan kondisi dan preferensi Anda."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "Pemeriksaan ibu hamil (ANC)",
+        "deskripsi": "Kami menyediakan layanan pemeriksaan antenatal care (ANC) untuk memantau kesehatan ibu dan janin selama kehamilan. Melalui pemeriksaan rutin, dokter kami memastikan perkembangan janin yang optimal dan memberikan panduan untuk kehamilan sehat hingga persalinan."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "pemeriksan bayi & balita",
+        "deskripsi": "Pastikan tumbuh kembang buah hati Anda dengan layanan pemeriksaan bayi dan balita. Kami membantu memantau berat badan, tinggi badan, serta kesehatan anak secara keseluruhan, dan memberikan saran terbaik untuk mendukung tumbuh kembang yang sehat."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "tindik",
+        "deskripsi": "Kami menawarkan layanan tindik bayi dan anak yang aman dan higienis. Prosedur dilakukan oleh tenaga medis berpengalaman menggunakan peralatan steril untuk memastikan kenyamanan dan keamanan si kecil."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "imunisasi",
+        "deskripsi": "Jaga daya tahan tubuh anak Anda dengan layanan imunisasi yang lengkap. Kami menyediakan berbagai jenis vaksin sesuai jadwal imunisasi yang direkomendasikan, membantu melindungi anak dari berbagai penyakit berbahaya."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "kespro remaja",
+        "deskripsi": "Layanan kesehatan reproduksi remaja kami dirancang untuk memberikan edukasi dan solusi terkait kesehatan reproduksi. Kami menciptakan lingkungan yang nyaman untuk remaja berkonsultasi dan mendapatkan informasi yang mereka butuhkan secara profesional dan privat."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "promkes",
+        "deskripsi": "Promosi kesehatan kami bertujuan untuk memberikan edukasi tentang pentingnya gaya hidup sehat bagi ibu dan anak. Dengan informasi yang mudah dipahami, kami membantu Anda menjaga kesehatan keluarga melalui pencegahan penyakit dan pola hidup sehat."
+    },
+    {
+        "layanan_nama": "Pelayanan Kesehatan Ibu & Anak",
+        "nama": "pelayanan setelah kehamilan (PNC)",
+        "deskripsi": "Kami mendukung pemulihan ibu setelah melahirkan melalui layanan postnatal care (PNC). Layanan ini mencakup pemantauan kesehatan ibu dan bayi, panduan menyusui, serta perawatan pascapersalinan untuk memastikan kondisi terbaik bagi ibu dan buah hati."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "Pemeriksaan darah rutin",
+        "deskripsi": "Layanan pemeriksaan darah rutin kami membantu memantau kondisi kesehatan Anda secara umum. Pemeriksaan ini mencakup analisis sederhana untuk mendeteksi adanya gangguan kesehatan atau sebagai bagian dari pemeriksaan kesehatan berkala."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan darah lengkap",
+        "deskripsi": "Layanan ini mencakup analisis menyeluruh terhadap komponen darah, seperti sel darah merah, sel darah putih, dan trombosit. Pemeriksaan ini penting untuk mendiagnosis penyakit atau gangguan kesehatan tertentu secara lebih mendalam."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan gula darah",
+        "deskripsi": "Kami menyediakan pemeriksaan gula darah untuk membantu mendeteksi risiko atau mengelola kondisi diabetes. Dengan hasil yang cepat dan akurat, Anda dapat memahami kadar gula darah Anda dan mendapatkan saran medis yang tepat."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan kolestrol",
+        "deskripsi": "Pantau kadar kolesterol Anda dengan layanan ini untuk mengetahui risiko penyakit kardiovaskular. Pemeriksaan ini memberikan gambaran lengkap tentang kadar kolesterol total, LDL, HDL, dan trigliserida dalam tubuh."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan asam urat",
+        "deskripsi": "Deteksi kadar asam urat dalam tubuh Anda untuk mencegah atau mengelola kondisi seperti gout. Pemeriksaan ini membantu Anda memahami pola makan dan gaya hidup yang lebih sehat."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan golongan darah",
+        "deskripsi": "Kami menyediakan layanan pemeriksaan golongan darah untuk mengetahui golongan dan rhesus darah Anda, yang penting untuk keperluan medis, transfusi, atau kehamilan."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "plano test",
+        "deskripsi": "Layanan Plano Test bertujuan mendeteksi adanya infeksi atau kondisi medis tertentu. Proses dilakukan dengan akurasi tinggi untuk memberikan hasil yang dapat diandalkan sebagai bagian dari diagnosis lebih lanjut."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan sifilis",
+        "deskripsi": "Deteksi dini penyakit sifilis dengan layanan pemeriksaan yang aman dan akurat. Hasil pemeriksaan ini membantu Anda mendapatkan pengobatan yang tepat sejak dini jika diperlukan."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan HIV",
+        "deskripsi": "Layanan pemeriksaan HIV kami dilakukan secara privat dan aman untuk memberikan hasil yang cepat dan akurat. Kami mendukung Anda dengan informasi dan rujukan pengobatan yang diperlukan sesuai hasil pemeriksaan."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemmeriksan HbsAg (hepatitis B)",
+        "deskripsi": "Deteksi keberadaan virus hepatitis B dalam tubuh melalui pemeriksaan HBsAg. Hasil pemeriksaan ini membantu menentukan langkah pencegahan atau pengobatan lebih lanjut."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "urinalisa",
+        "deskripsi": "Analisis urin kami membantu mendeteksi gangguan pada saluran kemih, ginjal, atau sistem tubuh lainnya. Pemeriksaan ini penting untuk mendiagnosis berbagai kondisi kesehatan."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan glukosa sewaktu",
+        "deskripsi": "Layanan ini mengukur kadar gula darah Anda kapan saja, tanpa perlu berpuasa sebelumnya. Cocok untuk pemantauan harian atau pemeriksaan awal terhadap risiko diabetes."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan glukosa 2 jam pp",
+        "deskripsi": "Pemeriksaan ini dilakukan dua jam setelah makan untuk mengetahui bagaimana tubuh Anda mengatur kadar gula darah. Penting bagi Anda yang berisiko atau sedang mengelola diabetes."
+    },
+    {
+        "layanan_nama": "Pelayanan Laboratorium",
+        "nama": "pemeriksaan glukosa puasa",
+        "deskripsi": "Pantau kadar gula darah Anda saat berpuasa untuk mendeteksi risiko diabetes. Pemeriksaan ini dilakukan setelah tidak makan atau minum selama setidaknya 8 jam."
+    }
+]

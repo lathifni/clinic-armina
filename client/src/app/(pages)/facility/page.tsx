@@ -1,9 +1,9 @@
 import { FacilityItem } from "@/components/facility/FacilityItem";
 import { NextPage } from "next"; 
 
-interface Props {}
+ 
 
-const Facility: NextPage<Props> = ({}) => {
+const Facility  = () => {
   return (
     <section className="py-12 mx-auto bg-white">
       <header className="text-4xl font-bold text-center py-12">

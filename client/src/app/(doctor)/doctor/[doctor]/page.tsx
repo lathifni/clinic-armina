@@ -29,9 +29,9 @@ type TestimoniSchema = {
   layanan_id: number;
 };
 const Practitioner = ({ params }: { params: { doctor: number } }) => {
-  const { data: fetchBrochure } = useFetchBrocures();
-  const { data: fetchSubLayanan } = useFetchSubLayanan();
-  const { data: fetchTestimoni } = useFetchTestimoni();
+  const { data: fetchBrochure, isLoading: brochureLoading } = useFetchBrocures();
+  const { data: fetchSubLayanan, isLoading: layananLoading } = useFetchSubLayanan();
+  const { data: fetchTestimoni, isLoading: testimoniLoadingLoading } = useFetchTestimoni();
 
   const { doctor } = params;
 

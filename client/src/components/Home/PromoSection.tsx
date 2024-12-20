@@ -2,14 +2,12 @@
 import { useFetchPromo } from "@/features/useFetchPromo";
 import { baseUrl } from "@/lib/baseUrl";
 import Image from "next/image";
-import Slider from "react-slick";
+import Slider from "react-slick"; 
+import { DataNotAvailable } from "../common/DataNotAvailable";
+import { ImageSkeleton } from "../skeleton/ImageSkeleton";
 
 export default function PromoSection() {
-  const { data, isLoading } = useFetchPromo();
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const { data, isLoading, isError } = useFetchPromo();
 
   const settings = {
     dots: true,
@@ -41,8 +39,15 @@ export default function PromoSection() {
   return (
     <section className="shadow-inner overflow-hidden   shadow-slate-500 bg-cyan-500/10 h-screen">
       <div className=" overflow-hidden    ">
-
-      <RenderPromo />
+        {!isError ? (
+          !isLoading ? (
+            <RenderPromo />
+          ) : (
+            <ImageSkeleton />
+          )
+        ) : (
+          <DataNotAvailable />
+        )}
       </div>
     </section>
   );

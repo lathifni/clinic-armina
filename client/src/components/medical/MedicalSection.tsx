@@ -1,6 +1,8 @@
 'use client'
 import { MedicalItem } from "@/components/medical/MedicalItem";
 import { useFetchMedical } from "@/features/useFetchMedical";
+import { ImageSkeleton } from "../skeleton/ImageSkeleton";
+import { DataNotAvailable } from "../common/DataNotAvailable";
 
 type MedicSchema = {
   id: number;
@@ -13,7 +15,7 @@ type MedicSchema = {
 };
 
 export const MedicalSection = () => {
-  const { data } = useFetchMedical();
+  const { data ,isError,isLoading } = useFetchMedical();
 
   const RenderMedic = () => {
     return data?.data?.map((medic: MedicSchema) => (
@@ -21,12 +23,16 @@ export const MedicalSection = () => {
     ));
   };
 
+  const LoadingSkeleton = ()=>{
+    return [...Array(4)].map((_,index)=>(<ImageSkeleton key={index} />))
+  }
+
   return (
     <article className="bg-white container py-12 min-w-96 rounded-xl px-4 sm:px-6 md:px-12 lg:px-24 max-w-5xl text-center grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 text-white">
       <h2 className="font-bold text-xl col-span-1 sm:col-span-2 text-slate-950">
         Tenaga Medis
       </h2>
-      {RenderMedic()}
+       {!isError ?!isLoading? <RenderMedic /> : <LoadingSkeleton />:<DataNotAvailable />}
     </article>
   );
 };

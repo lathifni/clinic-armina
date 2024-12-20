@@ -7,6 +7,8 @@ import OrganizationStructure from "@/components/about/OrganizationStructure";
 import ContentWrapper from "@/components/about/ContentWrapper";
 import { useFetchAbout } from "@/features/useFetchAbout";
 import { baseUrl } from "@/lib/baseUrl";
+import { DataNotAvailable } from "@/components/common/DataNotAvailable";
+import Loading from "@/components/common/Loading";
 
 type AboutSchema = {
   id: string;
@@ -26,7 +28,7 @@ const AboutUs: NextPage = () => {
     "Menciptakan lingkungan kerja yang sehat dan harmonis."
   ];
 
-  const { data, isLoading } = useFetchAbout();
+  const { data, isLoading ,isError} = useFetchAbout();
 
   const RenderAbout: NextPage = () => {
     return (
@@ -49,7 +51,7 @@ const AboutUs: NextPage = () => {
   return (
     <ContentWrapper>
       <VisionMission vision={vision} mission={mission} />
-      {!isLoading && data ? <RenderAbout /> : <p>Loading...</p>}  T
+      {!isError?!isLoading && data ? <RenderAbout /> : <Loading/>: <DataNotAvailable/>}  
       <OrganizationStructure />
     </ContentWrapper>
   );

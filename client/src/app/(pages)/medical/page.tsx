@@ -7,14 +7,7 @@ import Image from "next/image";
 interface Props {}
 
 const Medical: NextPage<Props> = ({}) => {
-  const {data,isLoading,isError}= useFetchMedical()
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <div>Error fetching data</div>;
-  }
+ 
   return (
     <section className="bg-blueLigth pb-12 space-y-12">
       <header className="w-full h-96 overflow-hidden">

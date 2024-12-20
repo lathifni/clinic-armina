@@ -20,8 +20,8 @@ const SubLayanan = sequelize.define(
             allowNull: false,
         },
         harga: {
-            type: Sequelize.FLOAT,
-            allowNull: false,
+            type: Sequelize.STRING,
+            allowNull: true,
         },
         image: {
             type: Sequelize.STRING,
@@ -29,6 +29,10 @@ const SubLayanan = sequelize.define(
         },
         link_youtube: {
             type: Sequelize.STRING,
+            allowNull: true,
+        },
+        layanan_id: {
+            type: Sequelize.INTEGER,
             allowNull: true,
         },
     },
